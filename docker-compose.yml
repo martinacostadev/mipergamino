@@ -11,12 +11,12 @@ services:
     volumes:
       - ./server/:/usr/src/app
       - /usr/src/app/node_modules
-    links:
-      - mongo
     ports:
       - "8080:8080"
+    links:
+      - client      
     depends_on:
-      - mongo
+      - client
     env_file: ./server/.env
     environment:
       - NODE_ENV=development
@@ -24,6 +24,7 @@ services:
       - app-network
   mongo:
     image: mongo
+    restart: always
     volumes:
       - data-volume:/data/db
     ports:
@@ -42,7 +43,9 @@ services:
       - /usr/app/node_modules
       - /usr/src/app/.next
     depends_on:
-      - server
+      - mongo
+    links:
+      - mongo
     ports:
       - "3000:3000"
     stdin_open: true
