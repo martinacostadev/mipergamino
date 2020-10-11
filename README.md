@@ -1,29 +1,35 @@
 # mipergamino
 
+DEVELOPMENT
+
 cd mipergamino
 cd server
 npm update
 npm install
 npm run dev
 
-cd ..
+cd mipergamino
 cd client
 npm update
 npm install
 npm run dev
 
-cd ..
+- Instalar MongoDB
+
+Opción Consola:
+
+- Crear base mipergamino con comando: use mipergamino
+- Crear 
+
+Opción Interfaz Gráfica MongoDB:
+
+Se puede utilizar MongoDB Compass
+URL Conexión: mongodb://127.0.0.1:27017
+- Create database mipergamino
+
+
+
+
+PRODUCTION
+
 docker-compose up --build
-
-Change Proxy URL in:
-client/package.json
-client/pages/alquileres.js 
-and .env file
-
-
-docker-compose.yml
-
-mongo:
-    volumes:
-      - ./mongo_data:/data/db (Windows)
-      - data-volume:/data/db (Mac)

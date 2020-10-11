@@ -1,5 +1,6 @@
 // server.js
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const PORT = 8080;
 const router = express.Router();
@@ -7,13 +8,15 @@ const router = express.Router();
 require('./src/database');
 
 app.get('/', (req, res) => {
-    res.send("Mi Pergamino");
+  res.send("Mi Ciudad");
 });
 
 const bodyParser = require('body-parser');
 
 // Routes
-const postRouter = require('./src/routes/post.router');
+const alquilerRouter = require('./src/routes/alquiler.router');
+
+app.use(cors());
 
 app.use(
   bodyParser.urlencoded({
@@ -22,13 +25,13 @@ app.use(
 );
 app.use(bodyParser.json());
 
-app.use('/posts', postRouter);
+app.use('/alquileres', alquilerRouter);
 
 // will redirect all the non-api routes to react frontend
-router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, '../client','build','index.html'));
+router.use(function (req, res) {
+  res.sendFile(path.join(__dirname, '../client', 'build', 'index.html'));
 });
 
 app.listen(PORT, function () {
-    console.log(`Server Listening on ${PORT}`);
+  console.log(`Server Listening on ${PORT}`);
 });

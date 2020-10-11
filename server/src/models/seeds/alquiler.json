@@ -1,0 +1,31 @@
+{
+  "title": "Casa en alquiler",
+  "description": "Casa amplia en el centro de la ciudad con chimenea verde",
+  "location": {
+    "city": "Pergamino",
+    "village": "Vicente López"
+  },
+  "isparticular": true,
+  "warranties": 2,
+  "images": [
+    "https://www.vivus.es/blog/wp-content/uploads/2019/04/hacerse-una-casa.jpeg",
+    "https://planosdecasasmodernas.com/wp-content/uploads/2018/03/Plano-de-casa-de-7x12-metros-en-una-planta.jpg"
+  ],
+  "price": 3000,
+  "features": {
+    "bedrooms": 4,
+    "bathrooms": 2,
+    "garage": true,
+    "exterior": true,
+    "petsallowed": true,
+    "childrenallowed": false
+  },
+  "user": {
+    "name": "Marcelo Díaz",
+    "phoneNumber": "+54934112321",
+    "whatsapp": true
+  },
+  "createdAt": "2020-10-10 22:00:00",
+  "updated": "2020-10-10 22:00:00",
+  "deleted": false
+}

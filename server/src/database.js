@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-dotenv.config();
+const isDev = process.env.NODE_ENV !== "production";
+console.log('isDev', isDev)
+const envFile = isDev ? ".env.development" : ".env";
+console.log('envFile', envFile)
+dotenv.config({ path: envFile });
 
 // mongoose options
 const options = {

@@ -20,6 +20,7 @@ services:
     env_file: ./server/.env
     environment:
       - NODE_ENV=development
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
     networks:
       - app-network
   mongo:

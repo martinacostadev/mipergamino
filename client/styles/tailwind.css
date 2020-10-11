@@ -7,6 +7,13 @@ body {
 }
 
 .item-menu-inicio {
-  @apply mx-auto w-full text-center pl-6 pr-6 pb-4 pt-4 p-3 border-solid border-2 border-gray-400 mb-3;
+  @apply mx-auto w-full text-center px-10 py-8 border-solid border-2 border-gray-400 mb-3;
 }
 
+.rent-image {
+  @apply h-48 flex-none bg-cover rounded-t text-center overflow-hidden;
+}
+
+.feature {
+  @apply py-4 flex justify-between
+}

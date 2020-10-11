@@ -1,5 +1,4 @@
 import Link from "next/link";
-import MainLayout from "./layouts/MainLayout";
 import Head from 'next/head'
 
 export default function Profile() {
@@ -21,5 +20,3 @@ export default function Profile() {
     </div>
   );
 }
-
-Profile.Layout = MainLayout;
