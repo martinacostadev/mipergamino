@@ -7,7 +7,7 @@ const removeAccentsAndLowerCase = (str) => {
 export default function Menubutton({ text }) {
   return (
     <Link href={`/${removeAccentsAndLowerCase(text)}`} >
-      <div className="item-menu-inicio md:rounded-lg">
+      <div className="rounded-lg min-h-10 item-menu-inicio">
         {text}
       </div>
     </Link >

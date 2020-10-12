@@ -22,6 +22,13 @@ export default function Alquileres({ rents }) {
 }
 
 Alquileres.getInitialProps = async () => {
+  // getStaticProps para cuando la data no cambia constantemente. Se puede setear cada 1 hora.
+  // Alquiler.find({ "deleted": { $eq: false } }, function (err, result) {
+  //   if (err) return res.status(400).send(err.message);
+
+  //   res.status(200).send(result);
+  // });
+
   const res = await fetch(`${process.env.URL}/alquileres`)
   const rents = await res.json()
 

@@ -13,7 +13,7 @@ export default function NavBar() {
           </Link>
         </div>
         <Link href="/profile">
-          <a href="#" className="ml-8 text-sm px-3 py-2 leading-none border rounded hover:text-teal-500 mt-4 lg:mt-0">Perfil</a>
+          <a href="#" className="ml-8 text-sm px-3 py-2 leading-none border rounded hover:text-teal-500 lg:mt-0">Perfil</a>
         </Link>
       </div>
       <div className="mt-2 lg:py-4 mb-2">

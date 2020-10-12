@@ -15,5 +15,5 @@ body {
 }
 
 .feature {
-  @apply py-4 flex justify-between
+  @apply py-4 flex justify-between items-center;
 }

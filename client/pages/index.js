@@ -8,7 +8,7 @@ function HomePage() {
     "Empleos"
   ]
 
-  return <div className="p-4 max-w-xl mx-auto px-8">
+  return <div>
     <Head>
       <title>MiPergamino</title>
       <meta property="og:title" content="MiPergamino" key="title" />
@@ -18,7 +18,7 @@ function HomePage() {
 
     </header>
     <main>
-      <div className="justify-center items-center">
+      <div className="grid grid-flow-col grid-rows-3 sm:grid-rows-1 gap-4 py-4 justify-items-center">
         {
           menuButtons.map(
             string => <MenuButton key={string} text={string} />

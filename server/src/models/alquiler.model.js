@@ -6,6 +6,8 @@ const alquilerSchema = new mongoose.Schema({
         city: String,
         village: String,
     },
+    isparticular: Boolean,
+    warranties: Number,
     images: [String],
     price: Number,
     features: {
