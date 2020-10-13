@@ -4,15 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw, faBaby, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { Patio, Garage, Bedroom, Bathroom, Inmobiliaria, Particular } from './icons';
 import Modal from 'react-modal';
+import { useRef } from 'react';
+import ModalGoncy from './ModalGoncy';
 
 export default function RentCard({ rent }) {
   const { title, description, location, isparticular, warranties, images, price, features, user, createdAt } = rent;
   const [Height, setHeight] = useState(51);
   const [ShowArrow, setShowArrow] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const desc = useRef(null);
 
   useEffect(() => {
-    const wrapperHeight = document.querySelector(`.measuringWrapper.description-${rent._id}`).clientHeight
+    const wrapperHeight = desc.current.clientHeight // document.querySelector(`.measuringWrapper.description-${rent._id}`).clientHeight
     if (wrapperHeight > 51) {
       setShowArrow(true)
     }
@@ -33,11 +36,13 @@ export default function RentCard({ rent }) {
 
   Modal.setAppElement('#__next');
 
-  const closeModal = function () {
-    let timer = setTimeout(() => {
-      setIsOpen(false);
-    }, 300);
-  }
+  // const closeModal = function () {
+  //   // let timer = setTimeout(() => {
+  //   //   setIsOpen(false);
+  //   // }, 300);
+  //   debugger;
+  //   setIsOpen(false);
+  // }
 
   function openModal() {
     setIsOpen(true);
@@ -54,6 +59,7 @@ export default function RentCard({ rent }) {
   }
 
   return (
+    <>
     <div className="w-full mb-16 sm:mb-14">
       <div className="sm:max-w w-full lg:max-w-full lg:flex">
         <div
@@ -61,20 +67,6 @@ export default function RentCard({ rent }) {
           style={{ backgroundImage: `url(${images[0]})`, position: 'relative' }} title={title}
           onClick={openModal}
         >
-
-          <Modal
-            isOpen={modalIsOpen}
-            onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
-            <button onClick={closeModal}>Cerrar</button>
-            <div>
-              <img src="https://www.vivus.es/blog/wp-content/uploads/2019/04/hacerse-una-casa.jpeg" />
-            </div>
-          </Modal>
-
         </div>
         <div className="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
           <div className="mb-8">
@@ -85,8 +77,8 @@ export default function RentCard({ rent }) {
             {/* <p className="text-gray-700 text-base" style={{ display: Height ? 'none' : 'block' }} >{description}</p> */}
 
             <div id="grow" style={{ height: Height }} onClick={toggleDescription}>
-              <div className={`measuringWrapper description-${rent._id}`}>
-                <div className="text-gray-700 text-base">{description}<span style={{ display: ShowArrow ? 'block' : 'none' }}>...</span></div>
+              <div className={`measuringWrapper description-${rent._id}`} ref={desc}>
+                <div className="text-gray-700 text-base" style={{ '-webkit-box-orient': 'vertical', overflow: 'hidden', display: '-webkit-box', "-webkit-line-clamp": '1'}}>{description}<span style={{ display: ShowArrow ? 'block' : 'none' }}>...</span></div>
               </div>
             </div>
 
@@ -172,6 +164,14 @@ export default function RentCard({ rent }) {
           </div>
         </div>
       </div>
+      
+
     </div>
+    {modalIsOpen && <ModalGoncy onClose={() => setIsOpen(false)}>
+    <div>
+      <img src="https://www.vivus.es/blog/wp-content/uploads/2019/04/hacerse-una-casa.jpeg" />
+    </div>
+    </ModalGoncy>
+}</>
   )
 }

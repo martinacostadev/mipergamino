@@ -6,6 +6,9 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <MainLayout>
       <Component {...pageProps} />
+      <div id="modalgoncy">
+        
+      </div>
     </MainLayout>
   )
 }

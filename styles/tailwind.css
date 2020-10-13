@@ -50,6 +50,15 @@ body {
   overflow: hidden;
 }
 
+modalgoncy {
+  cursor: pointer;
+  -moz-transition: height 5.5s;
+  -ms-transition: height 5.5s;
+  -o-transition: height 5.5s;
+  -webkit-transition: height 5.5s;
+  transition: height 5.5s;
+}
+
 button:focus {
   outline: none;
 }
