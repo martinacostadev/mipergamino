@@ -1,9 +1,28 @@
-node_modules
-server/node_modules
-npm-debug.log
-package-lock.json
+# vscode
+/.vscode
 
-.envgit init
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
-build/
-dist/
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+/dist
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
