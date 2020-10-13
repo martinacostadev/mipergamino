@@ -4,12 +4,12 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export default function NavBar() {
   return (
-    <nav>
-      <div className="py-4 flex-shrink-0 flex items-center">
+    <nav className="mx-auto bg-gray-300 mt-0 top-0 fixed w-full z-50 px-8">
+      <div className="pt-4 flex-shrink-0 flex items-center">
         <img className="h-8 w-8" src="/logo.svg" alt="" />
         <div className="flex-grow">
           <Link href="/">
-            <a className="ml-8 font-medium text-gray-900">Inicio</a>
+            <a className="ml-4 font-medium text-gray-900">Inicio</a>
           </Link>
         </div>
         <Link href="/profile">

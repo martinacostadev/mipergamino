@@ -15,7 +15,7 @@ module.exports = (phase) => {
   const isStaging =
     phase === PHASE_PRODUCTION_BUILD && process.env.STAGING === '1'
 
-  console.log(`isDev:${isDev}  isProd:${isProd}  isStaging:${isStaging}`)
+  // console.log(`isDev:${isDev}  isProd:${isProd}  isStaging:${isStaging}`)
 
   const env = {
     URL: (() => {

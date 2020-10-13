@@ -1,21 +1,21 @@
 import Head from 'next/head'
-import RentCard from '../components/RentCard'
-import API from '../db/alquiler/api'
+import EmpleoCard from '../components/EmpleoCard'
+import API from '../db/empleo/api'
 
-export default function Alquileres({ rents }) {
+export default function Empleos({ empleos }) {
   return (
     <div className="mx-auto">
       <Head>
-        <title>Alquileres - MiPergamino</title>
+        <title>Empleos - MiPergamino</title>
         <meta property="og:title" content="MiPergamino" key="title" />
       </Head>
       <div className="m-auto">
         <div className="text-3xl mb-5">
-          <h2>Alquileres</h2>
+          <h2>Empleos</h2>
         </div>
 
-        {rents.map((rent) => (
-          <RentCard rent={rent} key={rent._id} />
+        {empleos.map((empleo) => (
+          <EmpleoCard empleo={empleo} key={empleo._id} />
         ))}
       </div>
     </div>
@@ -24,12 +24,12 @@ export default function Alquileres({ rents }) {
 
 export const getServerSideProps = async () => {
   try {
-    const Alquileres = await API.Alquileres.fetch()
+    const Empleos = await API.Empleos.fetch()
 
     return {
       props:
       {
-        rents: Alquileres
+        empleos: Empleos
       }
     }
   } catch (err) {
@@ -37,7 +37,7 @@ export const getServerSideProps = async () => {
     return {
       props:
       {
-        rents: []
+        empleos: []
       }
     }
   }

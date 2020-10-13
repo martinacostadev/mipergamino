@@ -11,9 +11,36 @@ body {
 }
 
 .rent-image {
-  @apply h-48 flex-none bg-cover rounded-t text-center overflow-hidden;
+  @apply h-48 flex-none bg-cover rounded-t text-center overflow-hidden cursor-pointer;
 }
 
 .feature {
   @apply py-4 flex justify-between items-center;
+}
+
+.svg {
+  @apply w-12 flex justify-center;
+}
+
+
+#more-button {border-style:none;background:none;font:16px Serif;color:blue;margin: 0 0 10px 0;}
+
+#more-button:hover {color:black;}
+
+#grow input:checked {color:red;}
+
+#grow {
+    min-height: 51px;
+    cursor: pointer;
+    -moz-transition: height .5s;
+    -ms-transition: height .5s;
+    -o-transition: height .5s;
+    -webkit-transition: height .5s;
+    transition: height .5s;
+    height: 0;
+    overflow: hidden;
+}
+
+button:focus {
+  outline: none;  
 }

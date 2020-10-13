@@ -8,7 +8,7 @@ function HomePage() {
     "Empleos"
   ]
 
-  return <div>
+  return <div id="root">
     <Head>
       <title>MiPergamino</title>
       <meta property="og:title" content="MiPergamino" key="title" />
@@ -17,7 +17,7 @@ function HomePage() {
     <header>
 
     </header>
-    <main>
+    <main id="root">
       <div className="grid grid-flow-col grid-rows-3 sm:grid-rows-1 gap-4 py-4 justify-items-center">
         {
           menuButtons.map(

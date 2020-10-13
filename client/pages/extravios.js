@@ -1,21 +1,21 @@
 import Head from 'next/head'
-import RentCard from '../components/RentCard'
-import API from '../db/alquiler/api'
+import ExtravioCard from '../components/ExtravioCard'
+import API from '../db/extravio/api'
 
-export default function Alquileres({ rents }) {
+export default function Extravios({ extravios }) {
   return (
     <div className="mx-auto">
       <Head>
-        <title>Alquileres - MiPergamino</title>
+        <title>Extravíos - MiPergamino</title>
         <meta property="og:title" content="MiPergamino" key="title" />
       </Head>
       <div className="m-auto">
         <div className="text-3xl mb-5">
-          <h2>Alquileres</h2>
+          <h2>Extravíos</h2>
         </div>
 
-        {rents.map((rent) => (
-          <RentCard rent={rent} key={rent._id} />
+        {extravios.map((extravio) => (
+          <ExtravioCard extravio={extravio} key={extravio._id} />
         ))}
       </div>
     </div>
@@ -24,12 +24,12 @@ export default function Alquileres({ rents }) {
 
 export const getServerSideProps = async () => {
   try {
-    const Alquileres = await API.Alquileres.fetch()
+    const Extravios = await API.Extravios.fetch()
 
     return {
       props:
       {
-        rents: Alquileres
+        extravios: Extravios
       }
     }
   } catch (err) {
@@ -37,7 +37,7 @@ export const getServerSideProps = async () => {
     return {
       props:
       {
-        rents: []
+        extravios: []
       }
     }
   }

@@ -11,10 +11,13 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@zeit/next-sass": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.10.9",
     "next": "^9.5.3",
     "postcss-preset-env": "^6.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-modal": "^3.11.2",
     "react-scripts": "3.4.3",
     "sass": "^1.26.11",
     "tailwindcss": "^1.8.10"
