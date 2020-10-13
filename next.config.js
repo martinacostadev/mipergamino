@@ -19,7 +19,7 @@ module.exports = (phase) => {
 
   const env = {
     URL: (() => {
-      if (isProd) return 'http://server:8080'
+      if (isProd) return 'http://127.0.0.1:8080'
 
       return 'http://127.0.0.1:8080'
     })(),
