@@ -7,7 +7,7 @@ body {
 }
 
 .item-menu-inicio {
-  @apply mx-auto w-full text-center px-10 py-8 border-solid border-2 border-gray-400 mb-3;
+  @apply mx-auto w-full text-center px-10 py-8 border-solid border-2 border-gray-400 mb-3 cursor-pointer;
 }
 
 .rent-image {
@@ -22,25 +22,34 @@ body {
   @apply w-12 flex justify-center;
 }
 
+#more-button {
+  border-style: none;
+  background: none;
+  font: 16px Serif;
+  color: blue;
+  margin: 0 0 10px 0;
+}
 
-#more-button {border-style:none;background:none;font:16px Serif;color:blue;margin: 0 0 10px 0;}
+#more-button:hover {
+  color: black;
+}
 
-#more-button:hover {color:black;}
-
-#grow input:checked {color:red;}
+#grow input:checked {
+  color: red;
+}
 
 #grow {
-    min-height: 51px;
-    cursor: pointer;
-    -moz-transition: height .5s;
-    -ms-transition: height .5s;
-    -o-transition: height .5s;
-    -webkit-transition: height .5s;
-    transition: height .5s;
-    height: 0;
-    overflow: hidden;
+  min-height: 51px;
+  cursor: pointer;
+  -moz-transition: height 0.5s;
+  -ms-transition: height 0.5s;
+  -o-transition: height 0.5s;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
+  height: 0;
+  overflow: hidden;
 }
 
 button:focus {
-  outline: none;  
+  outline: none;
 }

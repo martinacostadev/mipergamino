@@ -20,6 +20,8 @@ module.exports = {
       'blue': theme('colors.blue.600'),
     })
   },
-  variants: {},
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus'],
+  },
   plugins: [],
 }
