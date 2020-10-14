@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import ExtravioCard from '../components/ExtravioCard'
-import API from '../db/extravio/api'
+import Head from "next/head";
+import ExtravioCard from "../components/ExtravioCard";
+import API from "../db/extravio/api";
 
 export default function Extravios({ extravios }) {
   return (
@@ -10,35 +10,31 @@ export default function Extravios({ extravios }) {
         <meta property="og:title" content="MiPergamino" key="title" />
       </Head>
       <div className="m-auto">
-        <div className="text-3xl mb-5">
-          <h2>Extravíos</h2>
-        </div>
+        <PageTitle title="Extravíos" />
 
         {extravios.map((extravio) => (
           <ExtravioCard extravio={extravio} key={extravio._id} />
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export const getServerSideProps = async () => {
   try {
-    const Extravios = await API.Extravios.fetch()
+    const Extravios = await API.Extravios.fetch();
 
     return {
-      props:
-      {
-        extravios: Extravios
-      }
-    }
+      props: {
+        extravios: Extravios,
+      },
+    };
   } catch (err) {
-    console.log('err', err)
+    console.log("err", err);
     return {
-      props:
-      {
-        extravios: []
-      }
-    }
+      props: {
+        extravios: [],
+      },
+    };
   }
-}
+};
