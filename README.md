@@ -42,4 +42,4 @@ Puede ver una lista de los issues en este [tablero de Trello](https://trello.com
 
 ## Licencia
 
-[MIT]()
+[MIT](https://github.com/sebastiantorres86/mipergamino/blob/main/LICENSE)
