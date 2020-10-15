@@ -8,7 +8,7 @@ NextJS, NextJS API y MongoDB. CSS: Tailwind.
 
 https://trello.com/b/MTSwJf4j/miciudad
 
-# Cómo ejecutar proyecto
+# Cómo ejecutar proyecto:
 
 ```sh
 cd mipergamino
