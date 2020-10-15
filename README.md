@@ -15,10 +15,6 @@ cd mipergamino
 ```
 
 ```sh
-cd client
-```
-
-```sh
 npm update
 ```
 

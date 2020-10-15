@@ -23,8 +23,15 @@ export default function Alquileres({ rents }) {
 }
 
 export const getServerSideProps = async () => {
+  // Implementar React Query
+
   try {
-    const Alquileres = await API.Alquileres.fetch()
+    const filters = {
+      "title": "Casa en alquiler",
+      "features.bedrooms": 4
+    }
+
+    const Alquileres = await API.Alquileres.fetch(filters) // /api/alquiler/filters
 
     return {
       props:

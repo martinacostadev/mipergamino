@@ -17,7 +17,7 @@
     "postcss-preset-env": "^6.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-modal": "^3.11.2",
+    "react-multi-carousel": "^2.5.5",
     "react-scripts": "3.4.3",
     "sass": "^1.26.11",
     "tailwindcss": "^1.8.10"

@@ -50,15 +50,15 @@ body {
   overflow: hidden;
 }
 
-modalgoncy {
-  cursor: pointer;
-  -moz-transition: height 5.5s;
-  -ms-transition: height 5.5s;
-  -o-transition: height 5.5s;
-  -webkit-transition: height 5.5s;
-  transition: height 5.5s;
+.modalgoncy {
+  @apply cursor-pointer z-50 flex items-center justify-center fixed left-0 top-0 w-screen h-screen;
 }
 
 button:focus {
   outline: none;
+}
+
+.gallery {
+  --gallery_width: 800px;
+  --gallery_height: 400px;
 }

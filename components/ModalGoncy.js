@@ -12,7 +12,7 @@ export default function ModalGoncy({ children, onClose }) {
   }, [])
 
   return process.browser ? ReactDOM.createPortal(
-      <div className="modalgoncy" style={{zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'fixed', left: 0, top: 0, width: '100vw', height: '100vh'}}>
+      <div className="modalgoncy p-0 lg:p-20 xl:p-25">
         <div onClick={onClose} style={{position: 'absolute', left: 0, top: 0, width: '100vw', height: '100vh', backgroundColor: 'rgba(0,0,0,0.2)'}}></div>
         <div style={{zIndex: 1001, padding: '0 24px', position: 'relative'}}>
         <div style={{backgroundColor: 'white', padding: 4, borderRadius: 4, position: 'absolute', right: 45, top: 24, zIndex: 1001}} onClick={onClose}>X</div>

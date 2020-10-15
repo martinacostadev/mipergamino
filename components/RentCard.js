@@ -3,9 +3,36 @@ import { formatDate } from '../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw, faBaby, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { Patio, Garage, Bedroom, Bathroom, Inmobiliaria, Particular } from './icons';
-import Modal from 'react-modal';
 import { useRef } from 'react';
 import ModalGoncy from './ModalGoncy';
+import Carousel from 'react-multi-carousel';
+``
+const responsive={
+    desktop: {
+      breakpoint: {
+        max: 3000,
+        min: 1024
+      },
+      items: 1,
+      partialVisibilityGutter: 20
+    },
+    mobile: {
+      breakpoint: {
+        max: 464,
+        min: 0
+      },
+      items: 1,
+      partialVisibilityGutter: 30
+    },
+    tablet: {
+      breakpoint: {
+        max: 1024,
+        min: 464
+      },
+      items: 2,
+      partialVisibilityGutter: 30
+    }
+  };
 
 export default function RentCard({ rent }) {
   const { title, description, location, isparticular, warranties, images, price, features, user, createdAt } = rent;
@@ -21,36 +48,8 @@ export default function RentCard({ rent }) {
     }
   });
 
-  const customStyles = {
-    content: {
-      width: '80%',
-      top: '60%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      zIndex: '9999'
-    }
-  };
-
-  Modal.setAppElement('#__next');
-
-  // const closeModal = function () {
-  //   // let timer = setTimeout(() => {
-  //   //   setIsOpen(false);
-  //   // }, 300);
-  //   debugger;
-  //   setIsOpen(false);
-  // }
-
   function openModal() {
     setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    //subtitle.style.color = '#f00';
   }
 
   const toggleDescription = function () {
@@ -62,12 +61,35 @@ export default function RentCard({ rent }) {
     <>
     <div className="w-full mb-16 sm:mb-14">
       <div className="sm:max-w w-full lg:max-w-full lg:flex">
-        <div
+        {/* <div
           className="rent-image bg-center lg:h-auto lg:w-1/3 lg:rounded-t-none lg:rounded-l"
           style={{ backgroundImage: `url(${images[0]})`, position: 'relative' }} title={title}
           onClick={openModal}
         >
-        </div>
+        </div> */}
+
+<Carousel
+  centerMode={false}
+  swipeable={false}
+  draggable={false}
+  showDots={true}
+  responsive={responsive}
+  ssr={true} // means to render carousel on server-side.
+  infinite={true}
+  autoPlay={true}
+  autoPlaySpeed={2000}
+  keyBoardControl={true}
+  customTransition="all .5"
+  transitionDuration={500}
+  containerClass="carousel-container"
+  removeArrowOnDeviceType={["tablet", "mobile"]}
+  dotListClass="custom-dot-list-style"
+  itemClass="rent-image bg-center lg:h-auto lg:w-1/3 lg:rounded-t-none lg:rounded-l"
+>
+  <div> <img src={images[0]} onClick={openModal} /> </div>
+  <div> <img src={images[1]} onClick={openModal} /> </div>
+</Carousel>
+
         <div className="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
           <div className="mb-8">
             <p className="flex justify-between text-sm text-gray-600 flex items-center pb-2">
