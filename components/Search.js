@@ -11,7 +11,7 @@ export default function Search() {
       }`}
     >
       <div className="px-2 text-lg text-blue-700">
-        <FontAwesomeIcon icon={faSearch} />
+        <FontAwesomeIcon icon={faSearch} width={22} />
       </div>
       <input
         className="block w-full bg-transparent rounded-lg px-3 py-2 leading-tight"
