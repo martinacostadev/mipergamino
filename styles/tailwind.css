@@ -69,3 +69,10 @@ button:focus {
   --gallery_width: 800px;
   --gallery_height: 400px;
 }
+
+.alquilerDescription {
+  -webkit-box-orient: "vertical";
+  overflow: "hidden";
+  display: "-webkit-box";
+  -webkit-line-clamp: "1";
+}

@@ -92,7 +92,7 @@ export default function RentCard({ rent }) {
 
         <div className="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
           <div className="mb-8">
-            <p className="flex justify-between text-sm text-gray-600 flex items-center pb-2">
+            <p className="flex justify-between text-sm text-gray-600 items-center pb-2">
               {location.village}, {location.city} <span>{formatDate(createdAt)}</span>
             </p>
             <div className="text-gray-900 font-bold text-xl mb-2">{title} · <span className="text-gray-600">${price}</span></div>
@@ -100,7 +100,7 @@ export default function RentCard({ rent }) {
 
             <div id="grow" style={{ height: Height }} onClick={toggleDescription}>
               <div className={`measuringWrapper description-${rent._id}`} ref={desc}>
-                <div className="text-gray-700 text-base" style={{ '-webkit-box-orient': 'vertical', overflow: 'hidden', display: '-webkit-box', "-webkit-line-clamp": '1'}}>{description}<span style={{ display: ShowArrow ? 'block' : 'none' }}>...</span></div>
+                <div className="text-gray-700 text-base" className="alquilerDescription">{description}<span style={{ display: ShowArrow ? 'block' : 'none' }}>...</span></div>
               </div>
             </div>
 
