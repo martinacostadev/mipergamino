@@ -20,6 +20,8 @@ export default function Alquileres({ rents }) {
     Niños,
     Particular,
   }) => {
+    const parsedBedrooms = parseInt(Habitaciones);
+    const parsedBathrooms = parseInt(Baños);
     const filteredData = rents.filter(({ features, isparticular }) => {
       const {
         bedrooms,
@@ -30,8 +32,8 @@ export default function Alquileres({ rents }) {
         childrenallowed,
       } = features;
       return (
-        (!Habitaciones || Habitaciones == bedrooms) &&
-        (!Baños || Baños == bathrooms) &&
+        (!parsedBedrooms || parsedBedrooms == bedrooms) &&
+        (!parsedBathrooms || parsedBathrooms == bathrooms) &&
         (!Patio || Patio == exterior) &&
         (!Garage || Garage == garage) &&
         (!Mascotas || Mascotas == petsallowed) &&
