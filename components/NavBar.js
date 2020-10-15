@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from "next/router";
+import Search from "./Search";
 
 export default function NavBar() {
+  const router = useRouter();
+  const currentRoute = router.route;
   return (
     <nav className="mx-auto bg-gray-300 mt-0 top-0 fixed w-full z-50 px-8">
       <div className="pt-4 flex-shrink-0 flex items-center">
@@ -13,15 +15,15 @@ export default function NavBar() {
           </Link>
         </div>
         <Link href="/profile">
-          <a href="#" className="ml-8 text-sm px-3 py-2 leading-none border rounded hover:text-teal-500 lg:mt-0">Perfil</a>
+          <a
+            href="#"
+            className="ml-8 text-sm px-3 py-2 leading-none border rounded hover:text-teal-500 lg:mt-0"
+          >
+            Perfil
+          </a>
         </Link>
       </div>
-      <div className="mt-2 lg:py-4 mb-2">
-        <input
-          className="block w-full border border-gray-300 rounded-lg bg-gray-100 px-3 py-2 leading-tight focus:outline-none focus:border-gray-600 focus:bg-white"
-          placeholder="Buscar..."
-        />
-      </div>
+      {currentRoute !== "/" && <Search />}
     </nav>
-  )
+  );
 }

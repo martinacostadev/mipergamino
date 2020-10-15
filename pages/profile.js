@@ -1,5 +1,6 @@
 import Link from "next/link";
-import Head from 'next/head'
+import Head from "next/head";
+import PageTitle from "../components/PageTitle";
 
 export default function Profile() {
   return (
@@ -9,9 +10,7 @@ export default function Profile() {
         <meta property="og:title" content="MiPergamino" key="title" />
       </Head>
       <div className="m-auto">
-        <div className="text-3xl mb-5">
-          <h2>Perfil</h2>
-        </div>
+        <PageTitle title="Perfil" />
 
         <Link href="/">
           <a>Volver</a>
