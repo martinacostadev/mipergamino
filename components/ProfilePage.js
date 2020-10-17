@@ -3,7 +3,7 @@ import Editar from "./icons/Editar";
 
 export default function ProfilePage() {
   return (
-    <div className="flex justify-center mt-40 mb-6">
+    <div className="flex justify-center mt-24 mb-6">
       <form className="w-full xl:w-1/3 max-w-lg mb-6">
         <div className="flex -mx-3 mb-6">
           <div className="flex justify-center">
