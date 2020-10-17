@@ -1,6 +1,7 @@
 import Head from "next/head";
 import NavBar from "./NavBar";
 
+
 export default function MainLayout({ children }) {
   return (
     <div>

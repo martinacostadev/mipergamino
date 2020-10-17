@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -31,11 +31,14 @@ export default function Filter({
         x
       </button>
       {filterOptions.slice(0, 2).map((el, index) => (
-        <div key={index} className="flex lg:flex-row flex-col lg:items-center lg:align-middle mr-3">
+        <div
+          key={index}
+          className="flex lg:flex-row flex-col lg:items-center lg:align-middle mr-3"
+        >
           <button className={` filterOption`}>{el}</button>
           <input
             className="mb-4 lg:mb-0 w-8 text-center rounded-lg border border-blue-500  p-1 mx-1 lg:mx-0 lg:align-middle"
-            min="1" 
+            min="1"
             max="5"
             onChange={(e) => setFilters({ ...filters, [el]: e.target.value })}
             type="number"
@@ -44,16 +47,25 @@ export default function Filter({
         </div>
       ))}
       {filterOptions.slice(2).map((el, index) => (
-        <button key={index}
+        <button
+          key={index}
           className={filters[el] ? "selectedFilterOption" : "filterOption"}
-          style={{ "alignSelf": "flex-start", marginTop: 6, marginLeft: 7, "verticalAlign": "middle"  }}
+          style={{
+            alignSelf: "flex-start",
+            marginTop: 6,
+            marginLeft: 7,
+            verticalAlign: "middle",
+          }}
           onClick={() => setFilters({ ...filters, [el]: !filters[el] })}
         >
           {el}
         </button>
       ))}
       <button
-        onClick={() => { setSideFilterVisibility("invisible"); handleFilter(filters); }}
+        onClick={() => {
+          setSideFilterVisibility("invisible");
+          handleFilter(filters);
+        }}
         className="mt-4 lg:mt-0 p-1 px-4 lg:mx-0 text-blue-500 font-bold border border-blue-500 rounded-lg"
       >
         Filtrar
@@ -62,10 +74,14 @@ export default function Filter({
       <div className="hidden lg:block md:ml-6">
         <Link href="/alquileres/nuevo">
           <button className="cursor-pointer p-1 px-4 lg:mx-0 mx-4 hover:bg-green-500 text-white-700 font-semibold hover:text-white border border-green-500 hover:border-transparent rounded-full">
-            <FontAwesomeIcon icon={faPlus} width={24} className="text-green-600" />
-          </button> 
+            <FontAwesomeIcon
+              icon={faPlus}
+              width={24}
+              className="text-green-600"
+            />
+          </button>
         </Link>
-      </div>      
+      </div>
     </div>
   );
 }
