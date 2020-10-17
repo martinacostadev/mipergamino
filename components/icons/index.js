@@ -9,5 +9,6 @@ import Currency from './Currency';
 import JobLevel from './JobLevel';
 import Schedule from './Schedule';
 import ContractType from './ContractType';
+import FilterIcon from './FilterIcon';
 
-export { Patio, Garage, Bedroom, Bathroom, Inmobiliaria, Particular, Job, Currency, JobLevel, Schedule, ContractType }
+export { Patio, Garage, Bedroom, Bathroom, Inmobiliaria, Particular, Job, Currency, JobLevel, Schedule, ContractType,FilterIcon }

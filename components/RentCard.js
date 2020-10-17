@@ -61,14 +61,14 @@ export default function RentCard({ rent }) {
     <>
     <div className="w-full mb-16 sm:mb-14">
       <div className="sm:max-w w-full lg:max-w-full lg:flex">
-        {/* <div
+        <div
           className="rent-image bg-center lg:h-auto lg:w-1/3 lg:rounded-t-none lg:rounded-l"
           style={{ backgroundImage: `url(${images[0]})`, position: 'relative' }} title={title}
           onClick={openModal}
         >
-        </div> */}
+        </div>
 
-<Carousel
+{/* <Carousel
   centerMode={false}
   swipeable={false}
   draggable={false}
@@ -88,7 +88,7 @@ export default function RentCard({ rent }) {
 >
   <div> <img src={images[0]} onClick={openModal} /> </div>
   <div> <img src={images[1]} onClick={openModal} /> </div>
-</Carousel>
+</Carousel> */}
 
         <div className="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
           <div className="mb-8">

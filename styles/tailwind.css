@@ -23,7 +23,7 @@ body {
 }
 
 .filterOption {
-  @apply text-blue-500 rounded-lg m-1 py-1 px-4;
+  @apply rounded-lg mr-2 pr-2;
 }
 .selectedFilterOption {
   @apply text-white bg-blue-500 rounded-lg m-1 py-1 px-4;

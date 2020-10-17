@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Filter from "../components/Filter";
+import FilterIcon from "../components/icons/FilterIcon";
 import RentCard from "../components/RentCard";
 import PageTitle from "../components/PageTitle";
 import API from "../db/alquiler/api";
@@ -44,30 +45,39 @@ export default function Alquileres({ rents }) {
     setRentsData(filteredData);
   };
   return (
-    <div className="mx-auto">
+    <div className="mx-auto relative">
       <Head>
         <title>Alquileres - MiPergamino</title>
         <meta property="og:title" content="MiPergamino" key="title" />
       </Head>
-      <PageTitle title="Alquileres" />
-      <button
-        onClick={() => setSideFilterVisibility("visible")}
-        className={`lg:hidden font-bold text-blue-500 my-2`}
-      >
-        Añadir filtro
-      </button>
-      <div className={`flex flex-row lg:flex-col`}>
+      
+      <div className="fixed z-50 flex bg-gray-300 w-22 p-2 rounded-r-md lg:w-full lg">
+        
+        <PageTitle title="Alquileres" /> 
+
+        <button
+          onClick={() => setSideFilterVisibility("visible")}
+          className={`lg:hidden font-bold text-blue-500 my-2 flex items-center space-between`}
+        >
+         <FilterIcon size={22} color={'fill-blue'} className="flex" /> <span className="flex pl-2">Filtros</span>
+        </button>
+
         <Filter
           handleFilter={handleFilter}
           setSideFilterVisibility={setSideFilterVisibility}
           sideFilterVisibility={sideFilterVisibility}
-        />
-        <div className="flex flex-col">
-          {rentsData.map((rent) => (
-            <RentCard rent={rent} key={rent._id} />
-          ))}
-        </div>
+        />          
+
       </div>
+
+        <div className={`flex flex-row lg:flex-col`}>
+          <div className="w-full flex flex-col" style={{ position:'absolute', top:70 }}>
+            {rentsData.map((rent) => (
+              <RentCard rent={rent} key={rent._id} />
+            ))}
+          </div>
+        </div>         
+
     </div>
   );
 }

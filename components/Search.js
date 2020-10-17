@@ -15,6 +15,7 @@ export default function Search() {
       </div>
       <input
         className="block w-full bg-transparent rounded-lg px-3 py-2 leading-tight"
+        style={{ outlineStyle: 'none' }}
         placeholder="Buscar"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
