@@ -3,8 +3,8 @@ return (
     <div className="flex justify-center mb-6">
       <form className="w-full max-w-lg mb-6">
         <div className="flex flex-wrap mb-6">
-          <div className="text-2xl">
-            Nuevo Alquiler
+          <div className="text-2xl font-semibold">
+            Añadir Alquiler
           </div>
         </div>
 

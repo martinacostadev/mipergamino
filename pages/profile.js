@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Head from "next/head";
+import ProfilePage from "../components/ProfilePage";
 import PageTitle from "../components/PageTitle";
 
 export default function Profile() {
   return (
-    <div className="pt-1 pb-4 max-w-xl mx-auto px-8">
+    <div className="px-4">
       <Head>
         <title>Perfil - MiPergamino</title>
         <meta property="og:title" content="MiPergamino" key="title" />
@@ -12,9 +13,11 @@ export default function Profile() {
       <div className="m-auto">
         <PageTitle title="Perfil" />
 
-        <Link href="/">
+        <ProfilePage />
+        
+        {/* <Link href="/" className="flex float-right">
           <a>Volver</a>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
