@@ -34,7 +34,7 @@ export default function NavBar() {
         {currentRoute !== "/" && currentRoute !== "/profile" && <Search />}
       </nav>
 
-      <div className="h-40"></div>
+      <div className="h-18"></div>
     </>
   );
 }
