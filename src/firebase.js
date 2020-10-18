@@ -20,8 +20,6 @@ const database = firebase.firestore();
 const auth = firebase.auth();
 const providers = {
   google: new firebase.auth.GoogleAuthProvider(),
-  email: new firebase.auth.EmailAuthProvider(),
-  phone: new firebase.auth.PhoneAuthProvider(),
 };
 
 export { database, auth, providers };

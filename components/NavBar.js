@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 import Search from "./Search";
+import SessionContext, {
+  Provider as SessionProvider,
+} from "../src/session/context";
 
 export default function NavBar() {
   const router = useRouter();
@@ -14,22 +17,56 @@ export default function NavBar() {
           <img className="h-8 w-8" src="/logo.svg" alt="" />
           <div className="flex-grow">
             <Link href="/">
-              <a className="ml-4 font-medium text-gray-900">Inicio</a>
+              <a className="ml-3 font-medium text-gray-900">Inicio</a>
             </Link>
           </div>
-          <Link href="/profile">
-            <a
-              href="#"
-              className="flex items-center ml-8 text-sm px-3 py-2 leading-none hover:text-teal-500 lg:mt-0"
-            >
-              <FontAwesomeIcon
-                icon={faUser}
-                width={22}
-                className="text-gray-600 mr-2"
-              />{" "}
-              Perfil
-            </a>
-          </Link>
+
+          {/* <Login login={actions.signIn} status={status} /> */}
+          <SessionProvider>
+            <SessionContext.Consumer>
+              {(context) => {
+                // console.log(context);
+                // console.log(context.state.user.displayName);
+                // console.log(context.state.user.photoURL);
+                if (context.state.user.displayName != null) {
+                  // console.log(context.state.user.displayName);
+                  return (
+                    <>
+                      <Link href="/profile">
+                        <a
+                          href="#"
+                          className="flex items-center text-sm py-2 leading-none hover:text-blue-500 lg:mt-0"
+                        >
+                          {/* <FontAwesomeIcon
+                          icon={faUser}
+                          width={22}
+                          className="text-gray-600 mr-2"
+                        /> */}
+                          {context.state.user.displayName}
+                          <img
+                            src={context.state.user.photoURL}
+                            className="rounded-full ml-2 h-8 w-8 flex items-center justify-center"
+                            loading="lazy"
+                          />
+                        </a>
+                      </Link>
+
+                      <button
+                        className="ml-2"
+                        onClick={context.actions.signOut}
+                      >
+                        X
+                      </button>
+                    </>
+                  );
+                }
+
+                return (
+                  <button onClick={context.actions.signIn}>Ingresar</button>
+                );
+              }}
+            </SessionContext.Consumer>
+          </SessionProvider>
         </div>
         {currentRoute !== "/" && currentRoute !== "/profile" && <Search />}
       </nav>

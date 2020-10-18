@@ -55,6 +55,7 @@ export default function Filter({
             marginTop: 6,
             marginLeft: 7,
             verticalAlign: "middle",
+            paddingTop: 1,
           }}
           onClick={() => setFilters({ ...filters, [el]: !filters[el] })}
         >

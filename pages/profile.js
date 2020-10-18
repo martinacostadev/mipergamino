@@ -1,7 +1,9 @@
-import Link from "next/link";
 import Head from "next/head";
 import ProfilePage from "../components/ProfilePage";
 import PageTitle from "../components/PageTitle";
+import SessionContext, {
+  Provider as SessionProvider,
+} from "../src/session/context";
 
 export default function Profile() {
   return (
@@ -13,8 +15,15 @@ export default function Profile() {
       <div className="m-auto">
         <PageTitle title="Perfil" />
 
-        <ProfilePage />
-        
+        {/* <ProfilePage /> */}
+        <SessionProvider>
+          <SessionContext.Consumer>
+            {(context) => {
+              return <ProfilePage user={context.state.user} />;
+            }}
+          </SessionContext.Consumer>
+        </SessionProvider>
+
         {/* <Link href="/" className="flex float-right">
           <a>Volver</a>
         </Link> */}

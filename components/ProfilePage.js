@@ -1,17 +1,17 @@
 import Button from "./Button";
 import Editar from "./icons/Editar";
 
-export default function ProfilePage() {
+export default function ProfilePage({ user }) {
   return (
     <div className="flex justify-center mt-24 mb-6">
-      <form className="w-full xl:w-1/3 max-w-lg mb-6">
-        <div className="flex -mx-3 mb-6">
-          <div className="flex justify-center">
-            <div className="relative w-3/4 sm:w-4/12 px-1">
+      <form className="w-screen md:w-3/4 max-w-lg mb-6">
+        <div className="flex justify-center mb-6">
+          <div className="flex justify-center w-3/4 md:w-1/2">
+            <div className="relative w-full lg:w-3/4 items-center">
               <img
-                src="https://demos.creative-tim.com/tailwindcss-starter-project/_next/static/images/team-2-800x800-3e08ef145920c93bbe320add0d2ef58d.jpg"
+                src={user.photoURL}
                 alt="..."
-                className="shadow rounded-full max-w-full h-auto align-middle border-none"
+                className="shadow w-64 flex items-center rounded-full border-none"
               />
 
               <div className="absolute flex items-center bg-gray-800 rounded py-1 px-2 text-white right-0 bottom-0 mb-2">
@@ -28,7 +28,7 @@ export default function ProfilePage() {
               className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="title"
               type="text"
-              placeholder="Nombre"
+              placeholder={user.displayName}
             />
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function ProfilePage() {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="user"
               type="text"
-              placeholder="Usuario"
+              placeholder={user.email}
             />
           </div>
         </div>
@@ -70,7 +70,6 @@ export default function ProfilePage() {
             <Button
               onClick={(e) => {
                 e.preventDefault();
-                console.log("hola");
               }}
             >
               Actualizar

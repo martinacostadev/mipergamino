@@ -1,9 +1,15 @@
 import React from "react";
+import LoginScreen from "../../../components/Login";
 
-const LoginScreen = ({ login, status }) => (
+const PreLogin = ({ login, status }) => (
   <>
-    {status === "init" && <span>Trying to restore authentication...</span>}
-    {status === "restored" && <button onClick={login}>Login con Google</button>}
+    {status === "init" && (
+      <span>
+        {" "}
+        <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg>
+      </span>
+    )}
+    {status === "restored" && <LoginScreen login={login} />}
   </>
 );
-export default LoginScreen;
+export default PreLogin;

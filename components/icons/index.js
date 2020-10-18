@@ -11,6 +11,7 @@ import Schedule from "./Schedule";
 import ContractType from "./ContractType";
 import FilterIcon from "./FilterIcon";
 import Editar from "./Editar";
+import Gmail from "./Gmail";
 
 export {
   Patio,
@@ -26,4 +27,5 @@ export {
   ContractType,
   FilterIcon,
   Editar,
+  Gmail,
 };

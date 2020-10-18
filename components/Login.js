@@ -1,14 +1,15 @@
 import React from "react";
+import { Gmail } from "./icons";
 
-const Login = () => {
+const Login = ({ login }) => {
   return (
-    <div class="max-w-sm overflow-hidden shadow-lg flex items-center justify-center">
-      <div class=" min-h-screen flex rounded items-center justify-center bg-white  py-12 px-4 sm:px-6 lg:px-8 ">
-        <div class="max-w-md w-full">
+    <div class="absolute top-0 right-0 w-full shadow-lg flex items-center justify-center">
+      <div class="w-full lg:w-1/3 p-8 flex rounded items-center justify-center bg-white py-12">
+        <div class="w-full">
           <div>
             <img class="mx-auto h-12 w-auto" src="logo.svg" alt="Logo" />
-            <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-              Inicia sesión en tu cuenta
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              Iniciar sesión
             </h2>
             <p class="mt-2 text-center text-sm leading-5 text-gray-600">
               <a
@@ -19,7 +20,7 @@ const Login = () => {
               </a>
             </p>
           </div>
-          <form class="mt-8" action="#" method="POST">
+          <form class="mt-2" action="#" method="POST">
             <input type="hidden" name="remember" value="true" />
             <div class="rounded-md shadow-sm ">
               <div>
@@ -30,12 +31,12 @@ const Login = () => {
                   Email
                 </label>
                 <input
-                  aria-label="Email address"
+                  aria-label="Email"
                   name="email"
                   type="email"
                   required
                   class="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
-                  placeholder="Email address"
+                  placeholder="Email"
                 />
               </div>
               <div class="-mt-px py-3">
@@ -51,12 +52,12 @@ const Login = () => {
                   type="password"
                   required
                   class="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
-                  placeholder="Password"
+                  placeholder="Contraseña"
                 />
               </div>
             </div>
 
-            <div class="mt-6 flex items-center justify-between">
+            <div class="mt-2 flex items-center justify-between">
               <div class="flex items-center">
                 <input
                   id="remember_me"
@@ -70,8 +71,10 @@ const Login = () => {
                   Recuérdame
                 </label>
               </div>
+            </div>
 
-              <div class="text-sm leading-5">
+            <div class="mt-4 flex items-center justify-between">
+              <div class="flex text-sm leading-5">
                 <a
                   href="#"
                   class="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150"
@@ -84,7 +87,7 @@ const Login = () => {
             <div class="mt-6">
               <button
                 type="submit"
-                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white  bg-blue-500 hover:bg-blue-600 focus:outline-none focus:border-blue-600 focus:shadow-outline-blue active:bg-blue-600  transition duration-150 ease-in-out"
+                class="group relative w-full flex justify-center py-2 px-4 text-blue-500 border-2 border-blue-500 border-transparent text-sm leading-5 font-medium rounded-md hover:bg-blue-600 focus:outline-none focus:border-blue-600 focus:shadow-outline-blue active:bg-blue-600  transition duration-150 ease-in-out"
               >
                 <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                   <svg
@@ -100,6 +103,16 @@ const Login = () => {
                   </svg>
                 </span>
                 Iniciar sesión
+              </button>
+
+              <button
+                className="group w-full flex justify-center py-2 my-4 text-blue-500 border-blue-500 border border-transparent text-sm leading-5 font-medium rounded-md hover:bg-blue-600 focus:outline-none focus:border-blue-600 focus:shadow-outline-blue active:bg-blue-600  transition duration-150 ease-in-out"
+                onClick={login}
+              >
+                <span class="flex left-0 inset-y-0 items-center pr-3">
+                  <Gmail color={"fill-blue"} size={24} />
+                </span>
+                Login con Google
               </button>
             </div>
           </form>
