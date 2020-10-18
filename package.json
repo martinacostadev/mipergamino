@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@zeit/next-sass": "^1.0.1",
     "dotenv": "^8.2.0",
+    "firebase": "^7.24.0",
     "mongoose": "^5.10.9",
     "next": "^9.5.3",
     "postcss-preset-env": "^6.7.0",
