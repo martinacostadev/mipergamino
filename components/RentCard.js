@@ -18,7 +18,7 @@ import {
 import { useRef } from "react";
 import ModalGoncy from "./ModalGoncy";
 import Carousel from "react-multi-carousel";
-``;
+
 const responsive = {
   desktop: {
     breakpoint: {

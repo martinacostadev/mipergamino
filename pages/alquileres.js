@@ -5,12 +5,10 @@ import FilterIcon from "../components/icons/FilterIcon";
 import RentCard from "../components/RentCard";
 import PageTitle from "../components/PageTitle";
 import API from "../db/alquiler/api";
-import usePageBottom from "../utils/InifiniteScroll";
 
 export default function Alquileres({ rents }) {
   const [rentsData, setRentsData] = useState([]);
   const [sideFilterVisibility, setSideFilterVisibility] = useState("invisible");
-  const isPageBottom = usePageBottom();
 
   useEffect(() => {
     rents && setRentsData(rents);
@@ -99,7 +97,7 @@ export const getServerSideProps = async () => {
 
     const Alquileres = await API.Alquileres.fetch(filters); // /api/alquiler/filters
 
-    return {   
+    return {
       props: {
         rents: Alquileres,
       },

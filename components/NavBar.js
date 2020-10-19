@@ -42,7 +42,7 @@ export default function NavBar() {
                           width={22}
                           className="text-gray-600 mr-2"
                         /> */}
-                          {context.state.user.displayName}
+                          {context.state.user.displayName.split(" ")[0]}
                           <img
                             src={context.state.user.photoURL}
                             className="rounded-full ml-2 h-8 w-8 flex items-center justify-center"
