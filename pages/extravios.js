@@ -10,7 +10,7 @@ export default function Extravios({ extravios }) {
         <title>Extravíos - MiPergamino</title>
         <meta property="og:title" content="MiPergamino" key="title" />
       </Head>
-      <div className="m-auto">
+      <div className="m-auto" style={{ height: 10 }}>
         <PageTitle title="Extravíos" />
 
         {extravios.map((extravio) => (

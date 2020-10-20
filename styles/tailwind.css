@@ -2,9 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
 body {
-  @apply bg-gray-300;
+  @apply bg-gray-300 w-full h-full;
 }
+
+/* html,
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+} */
 
 .item-menu-inicio {
   @apply mx-auto w-full text-center px-10 py-8 border-solid border-2 border-gray-400 mb-3 cursor-pointer;

@@ -1,4 +1,5 @@
 const { useState, useEffect } = React;
+import { useRouter } from "next/router";
 import { formatDate } from "../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -48,6 +49,7 @@ const responsive = {
 
 export default function RentCard({ rent }) {
   const {
+    _id,
     title,
     description,
     location,
@@ -70,6 +72,8 @@ export default function RentCard({ rent }) {
       setShowArrow(true);
     }
   });
+
+  const router = useRouter();
 
   function openModal() {
     setIsOpen(true);
@@ -126,7 +130,10 @@ export default function RentCard({ rent }) {
                 {location.village}, {location.city}{" "}
                 <span>{formatDate(createdAt)}</span>
               </p>
-              <div className="text-gray-900 font-bold text-xl mb-2">
+              <div
+                className="text-gray-900 font-bold text-xl mb-2 cursor-pointer"
+                onClick={() => router.push(`/alquileres/${_id}`)}
+              >
                 {title} · <span className="text-gray-600">${price}</span>
               </div>
               {/* <p className="text-gray-700 text-base" style={{ display: Height ? 'none' : 'block' }} >{description}</p> */}

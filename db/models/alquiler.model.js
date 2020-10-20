@@ -1,38 +1,44 @@
-import mongoose from 'mongoose'
-const alquilerSchema = new mongoose.Schema({
+import mongoose from "mongoose";
+const mongoosePaginate = require("mongoose-paginate-v2");
+
+const alquilerSchema = new mongoose.Schema(
+  {
     title: String,
     description: String,
     location: {
-        city: String,
-        village: String,
+      city: String,
+      village: String,
     },
     isparticular: Boolean,
     warranties: Number,
     images: [String],
     price: Number,
     features: {
-        bedrooms: Number,
-        bathrooms: Number,
-        garage: Boolean,
-        exterior: Boolean,
-        petsallowed: Boolean,
-        childrenallowed: Boolean,
+      bedrooms: Number,
+      bathrooms: Number,
+      garage: Boolean,
+      exterior: Boolean,
+      petsallowed: Boolean,
+      childrenallowed: Boolean,
     },
     user: {
-        name: String,
-        phonenumber: String,
-        whatsapp: Boolean
+      name: String,
+      phonenumber: String,
+      whatsapp: Boolean,
     },
     createdAt: Date,
     updatedAt: Date,
-    deleted: Boolean
-},
-    {
-        collection: "alquiler",
-        versionKey: false
-    }
+    deleted: Boolean,
+  },
+  {
+    collection: "alquiler",
+    versionKey: false,
+  }
 );
 
-const Alquiler = mongoose.models.Alquiler || mongoose.model("Alquiler", alquilerSchema);
+alquilerSchema.plugin(mongoosePaginate);
 
-export default Alquiler
+const Alquiler =
+  mongoose.models.Alquiler || mongoose.model("Alquiler", alquilerSchema);
+
+export default Alquiler;

@@ -1,18 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, usePrefetchQuery } from "react";
 import Head from "next/head";
 import Filter from "../components/Filter";
 import FilterIcon from "../components/icons/FilterIcon";
 import RentCard from "../components/RentCard";
 import PageTitle from "../components/PageTitle";
 import API from "../db/alquiler/api";
+import InifiniteScroll from "../utils/useInfiniteScroll";
 
 export default function Alquileres({ rents }) {
+  const [offset, setOffset] = useState(0);
+  const { totalDocs } = rents;
   const [rentsData, setRentsData] = useState([]);
   const [sideFilterVisibility, setSideFilterVisibility] = useState("invisible");
-
   useEffect(() => {
-    rents && setRentsData(rents);
+    rents && setRentsData(rents.docs);
   }, []);
+
+  const [isFetching, setIsFetching] = InifiniteScroll(async () => {
+    const currentOffSet = offset < totalDocs ? offset + 5 : totalDocs;
+
+    setOffset(currentOffSet);
+
+    const Alquileres = await fetch("/api/alquiler/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        filters: {},
+        offset: currentOffSet,
+        limit: 5,
+      }),
+    });
+
+    const resultado = await Alquileres.json();
+    const rentsConcat = rentsData.concat(resultado.docs);
+    setRentsData(rentsConcat);
+
+    setIsFetching(false);
+  });
+
   const handleFilter = ({
     Habitaciones,
     Baños,
@@ -70,11 +97,14 @@ export default function Alquileres({ rents }) {
         />
       </div>
 
-      <div className={`flex flex-row lg:flex-col`}>
+      <div className={`flex flex-row lg:flex-col lg:items-center`}>
         <div
-          className="w-full flex flex-col"
+          className="w-full lg:w-3/4 flex flex-col"
           style={{ position: "absolute", top: 70 }}
         >
+          {/* {rentsData.length
+            ? rentsData.map((rent) => <RentCard rent={rent} key={rent._id} />)
+            : rents.docs.map((rent) => <RentCard rent={rent} key={rent._id} />)} */}
           {rentsData.map((rent) => (
             <RentCard rent={rent} key={rent._id} />
           ))}
@@ -84,10 +114,7 @@ export default function Alquileres({ rents }) {
   );
 }
 
-export const getServerSideProps = async () => {
-  // Implementar React Query en un futuro
-  //const page = query.page || 1;
-
+export const getServerSideProps = async ({ query }) => {
   try {
     // const filters = {
     //   "title": "Casa en alquiler",
@@ -95,7 +122,7 @@ export const getServerSideProps = async () => {
     // }
     const filters = {}; // Modificar para obtener Filtros realizados por Bianco
 
-    const Alquileres = await API.Alquileres.fetch(filters); // /api/alquiler/filters
+    const Alquileres = await API.Alquileres.fetch(filters, 0, 5); // /api/alquiler/filters
 
     return {
       props: {

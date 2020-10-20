@@ -6,10 +6,12 @@ import Search from "./Search";
 import SessionContext, {
   Provider as SessionProvider,
 } from "../src/session/context";
+//import { useUser } from "../src/session/hooks";
 
 export default function NavBar() {
   const router = useRouter();
   const currentRoute = router.route;
+
   return (
     <>
       <nav className="mx-auto bg-gray-300 mt-0 top-0 fixed w-full z-50 px-8">
@@ -28,7 +30,7 @@ export default function NavBar() {
                 // console.log(context);
                 // console.log(context.state.user.displayName);
                 // console.log(context.state.user.photoURL);
-                if (context.state.user.displayName != null) {
+                if (context.state.user.displayName) {
                   // console.log(context.state.user.displayName);
                   return (
                     <>

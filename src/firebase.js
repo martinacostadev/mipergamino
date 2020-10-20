@@ -3,7 +3,7 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const config = {
-  apiKey: "AIzaSyB9Ni7evDV5EqV2eQdEhkYFv-pL5ybJYy0",
+  apiKey: "AIzaSyB9Ni7evDV5EqV2eQdEhkYFv-pL5ybJYy0", //`${process.env.MONGO_PASSWORD}`,
   authDomain: "miciudad-52ac5.firebaseapp.com",
   databaseURL: "https://miciudad-52ac5.firebaseio.com",
   projectId: "miciudad-52ac5",
