@@ -6,6 +6,7 @@ import Search from "./Search";
 import SessionContext, {
   Provider as SessionProvider,
 } from "../src/session/context";
+import DropDownMenu from "./DropDownMenu";
 //import { useUser } from "../src/session/hooks";
 
 export default function NavBar() {
@@ -34,31 +35,7 @@ export default function NavBar() {
                   // console.log(context.state.user.displayName);
                   return (
                     <>
-                      <Link href="/profile">
-                        <a
-                          href="#"
-                          className="flex items-center text-sm py-2 leading-none hover:text-blue-500 lg:mt-0"
-                        >
-                          {/* <FontAwesomeIcon
-                          icon={faUser}
-                          width={22}
-                          className="text-gray-600 mr-2"
-                        /> */}
-                          {context.state.user.displayName.split(" ")[0]}
-                          <img
-                            src={context.state.user.photoURL}
-                            className="rounded-full ml-2 h-8 w-8 flex items-center justify-center"
-                            loading="lazy"
-                          />
-                        </a>
-                      </Link>
-
-                      <button
-                        className="ml-2"
-                        onClick={context.actions.signOut}
-                      >
-                        X
-                      </button>
+                      <DropDownMenu userContext={context} />
                     </>
                   );
                 }
