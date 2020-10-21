@@ -1,26 +1,35 @@
-import API from "../../../db/alquiler/api";
+import API from "~/db/alquiler/api";
 
 export default async (req, res) => {
-  console.log(req);
-  // Call different methods depending on the method
   switch (req.method) {
-    case "POST": {
+    case "PUT": {
       try {
         const {
           body: { filters, offset, limit },
         } = req;
 
-        // If everything is fine, return the results
         return res
           .status(200)
           .json(await API.Alquileres.fetch(filters, offset, limit));
       } catch (error) {
-        // Return a 400 if something failed
+        return res.status(400).json({ error });
+      }
+    }
+
+    case "POST": {
+      try {
+        console.log("req Pages/API/Alquileres/Index ", req);
+        //req.method = "POST";
+
+        const { body } = req;
+
+        if (body)
+          return res.status(200).json(await API.Alquileres.save({ body }));
+      } catch (error) {
         return res.status(400).json({ error });
       }
     }
   }
 
-  // If nothing matched, we return a 400
   return res.status(400).end();
 };

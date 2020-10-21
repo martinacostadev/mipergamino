@@ -1,4 +1,4 @@
-import { formatDate } from "../utils/utils";
+import { formatDate } from "~/utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faBaby } from "@fortawesome/free-solid-svg-icons";
 import {

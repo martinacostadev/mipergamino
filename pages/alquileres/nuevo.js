@@ -1,31 +1,34 @@
 import Head from "next/head";
+import Login from "../../components/Login";
 import NuevoAlquiler from "../../components/NuevoAlquiler";
 import PageTitle from "../../components/PageTitle";
-// import API from "../../db/empleo/api";
-import { Provider as SessionProvider } from "../../src/session/context";
+import { useUser, useSessionActions } from "../../src/session/hooks";
 
 export default function Nuevo() {
-  return (
-    <SessionProvider>
-      <div className="mx-auto">
-        <Head>
-          <title>Nuevo Alquiler - MiPergamino</title>
-          <meta property="og:title" content="MiPergamino" key="title" />
-        </Head>
-        <div className="m-auto">
-          <PageTitle title="Nuevo Alquiler" />
+  const user = useUser();
+  const { signIn } = useSessionActions();
 
-          <NuevoAlquiler />
-        </div>
+  if (!user) return <Login login={signIn} />;
+
+  return (
+    <div className="mx-auto">
+      <Head>
+        <title>Nuevo Alquiler - MiPergamino</title>
+        <meta property="og:title" content="MiPergamino" key="title" />
+      </Head>
+      <div className="m-auto">
+        <PageTitle title="Nuevo Alquiler" />
+
+        <NuevoAlquiler />
       </div>
-    </SessionProvider>    
+    </div>
   );
 }
 
 export const getServerSideProps = async () => {
-    return {
-      props: {
-        nuevo: [],
-      },
-    };
+  return {
+    props: {
+      nuevo: [],
+    },
+  };
 };

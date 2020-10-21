@@ -1,14 +1,14 @@
 import Link from "next/link";
 
-export default function DropDownMenu({ userContext }) {
+export default function DropDownMenu({ user, signOut }) {
   return (
     <div>
       <div className="group inline-block">
         <button className="outline-none focus:outline-none border px-3 py-1 rounded-sm flex items-center min-w-32">
           <span className="pr-1 font-semibold flex-1 flex items-center ">
-            {userContext.state.user.displayName.split(" ")[0]}
+            {user.displayName.split(" ")[0]}
             <img
-              src={userContext.state.user.photoURL}
+              src={user.photoURL}
               className="rounded-full ml-2 h-8 w-8 flex items-center justify-center"
               loading="lazy"
             />
@@ -33,7 +33,7 @@ export default function DropDownMenu({ userContext }) {
           </li>
           <li
             className="rounded-sm px-3 py-1 hover:bg-gray-100 cursor-pointer"
-            onClick={userContext.actions.signOut}
+            onClick={signOut}
           >
             Salir
           </li>

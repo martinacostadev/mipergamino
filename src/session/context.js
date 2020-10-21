@@ -19,6 +19,13 @@ const SessionProvider = ({ children }) => {
   React.useEffect(
     () =>
       auth.onChange((user) => {
+        // switch segun el Provider de Firebase
+
+        // const user = {
+        //   user:
+        //   email:
+        // }
+
         setUser(user);
 
         setStatus("restored");
@@ -26,7 +33,7 @@ const SessionProvider = ({ children }) => {
     []
   );
 
-  if (!user) return <Login login={actions.signIn} status={status} />;
+  // if (!user) return <Login login={actions.signIn} status={status} />;
 
   return (
     <SessionContext.Provider value={{ state, actions }}>

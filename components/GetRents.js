@@ -1,4 +1,4 @@
-import API from "../db/alquiler/api";
+import API from "~/db/alquiler/api";
 
 const getRents = async () => {
   const filters = {};

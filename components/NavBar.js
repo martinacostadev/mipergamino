@@ -5,13 +5,15 @@ import { useRouter } from "next/router";
 import Search from "./Search";
 import SessionContext, {
   Provider as SessionProvider,
-} from "../src/session/context";
+} from "~/src/session/context";
 import DropDownMenu from "./DropDownMenu";
-//import { useUser } from "../src/session/hooks";
+import { useUser, useSessionActions } from "~/src/session/hooks";
 
 export default function NavBar() {
   const router = useRouter();
   const currentRoute = router.route;
+  const user = useUser();
+  const { signIn, signOut } = useSessionActions();
 
   return (
     <>
@@ -24,28 +26,11 @@ export default function NavBar() {
             </Link>
           </div>
 
-          {/* <Login login={actions.signIn} status={status} /> */}
-          <SessionProvider>
-            <SessionContext.Consumer>
-              {(context) => {
-                // console.log(context);
-                // console.log(context.state.user.displayName);
-                // console.log(context.state.user.photoURL);
-                if (context.state.user.displayName) {
-                  // console.log(context.state.user.displayName);
-                  return (
-                    <>
-                      <DropDownMenu userContext={context} />
-                    </>
-                  );
-                }
-
-                return (
-                  <button onClick={context.actions.signIn}>Ingresar</button>
-                );
-              }}
-            </SessionContext.Consumer>
-          </SessionProvider>
+          {user ? (
+            <DropDownMenu user={user} signOut={signOut} />
+          ) : (
+            <button onClick={signIn}>Ingresar</button>
+          )}
         </div>
         {currentRoute !== "/" && currentRoute !== "/profile" && <Search />}
       </nav>

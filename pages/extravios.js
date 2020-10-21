@@ -1,7 +1,7 @@
 import Head from "next/head";
-import ExtravioCard from "../components/ExtravioCard";
-import PageTitle from "../components/PageTitle";
-import API from "../db/extravio/api";
+import ExtravioCard from "~/components/ExtravioCard";
+import PageTitle from "~/components/PageTitle";
+import API from "~/db/extravio/api";
 
 export default function Extravios({ extravios }) {
   return (

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Alquileres from "../components/icons/Alquileres";
+import Alquileres from "~/components/icons/Alquileres";
 
 const removeAccentsAndLowerCase = (str) => {
   return str

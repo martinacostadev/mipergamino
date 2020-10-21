@@ -1,11 +1,11 @@
 import { useEffect, useState, usePrefetchQuery } from "react";
 import Head from "next/head";
-import Filter from "../components/Filter";
-import FilterIcon from "../components/icons/FilterIcon";
-import RentCard from "../components/RentCard";
-import PageTitle from "../components/PageTitle";
-import API from "../db/alquiler/api";
-import InifiniteScroll from "../utils/useInfiniteScroll";
+import Filter from "~/components/Filter";
+import FilterIcon from "~/components/icons/FilterIcon";
+import RentCard from "~/components/RentCard";
+import PageTitle from "~/components/PageTitle";
+import API from "~/db/alquiler/api";
+import useInfiniteScroll from "~/utils/useInfiniteScroll";
 
 export default function Alquileres({ rents }) {
   const [offset, setOffset] = useState(0);
@@ -16,13 +16,14 @@ export default function Alquileres({ rents }) {
     rents && setRentsData(rents.docs);
   }, []);
 
-  const [isFetching, setIsFetching] = InifiniteScroll(async () => {
+  const [isFetching, setIsFetching] = useInfiniteScroll(async () => {
+    // Ver IntersectionObserver
     const currentOffSet = offset < totalDocs ? offset + 5 : totalDocs;
 
     setOffset(currentOffSet);
 
     const Alquileres = await fetch("/api/alquiler/", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
