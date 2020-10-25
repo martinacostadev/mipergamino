@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import firebase from "firebase/app";
+import "firebase/storage";
 
 export default function NuevoAlquiler() {
-  // const { formData, setFormData } = useState(null);
-  const { register, handleSubmit, watch, errors } = useForm();
+  const [images, setImages] = useState([]);
+  const { register, handleSubmit, errors } = useForm();
   const onSubmit = async (data) => {
     if (!data.title) console.log("apaaaa");
-    console.log("data: ", JSON.stringify(data));
-    // insert(data);
+    console.log("POST DATA: ", JSON.stringify(data));
+    console.table("Table Data", data);
 
     try {
       const res = await fetch("/api/alquiler", {
@@ -33,6 +35,68 @@ export default function NuevoAlquiler() {
   // useEffect(() => {
   //   register({ name: "title", type: "custom" }, { validate: { tieneValor } });
   // });
+
+  // React.useEffect(() => {
+  //   setValue("images", images);
+  // }, [setValue, images]);
+
+  const randomImageName = (image) => {
+    const imageFormat = image.type.split("/")[1];
+    const date = Date.now();
+    const RandomSixNumbers = Math.floor(100000 + Math.random() * 900000);
+    const imageName = `${date}-${RandomSixNumbers}.${imageFormat}`;
+
+    return imageName;
+  };
+
+  const onImageChange = (e) => {
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newImage = e.target.files[i];
+      newImage["url"] = URL.createObjectURL(newImage);
+      newImage["newRandomName"] = randomImageName(newImage);
+      setImages((prevState) => [...prevState, newImage]);
+    }
+  };
+
+  const removeImage = (url) => {
+    console.log("url", url);
+    const newImages = images.filter((image) => image.url != url);
+    setImages(newImages);
+  };
+
+  const onUploadSubmission = (e) => {
+    e.preventDefault(); // prevent page refreshing
+    const promises = [];
+
+    console.log("images", images);
+
+    images.forEach((image) => {
+      const uploadTask = firebase
+        .storage()
+        .ref()
+        .child(`images/${image.newRandomName}`)
+        .put(image);
+      promises.push(uploadTask);
+      uploadTask.on(
+        firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          if (snapshot.state === firebase.storage.TaskState.RUNNING) {
+            console.log(`Progreso: ${progress}%`);
+          }
+        },
+        (error) => console.log(error.code),
+        async () => {
+          const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+          console.log(downloadURL);
+        }
+      );
+    });
+    Promise.all(promises)
+      .then(() => alert("Todas las imágenes se han subido"))
+      .catch((err) => console.log(err.code));
+  };
 
   const insert = async (e) => {
     e.preventDefault;
@@ -339,7 +403,7 @@ export default function NuevoAlquiler() {
           </div>
         </div>
 
-        <div className="w-full md:w-1/3 mb-6 md:mb-4">
+        <div className="w-full mb-6 md:mb-4">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             htmlFor="images"
@@ -347,8 +411,47 @@ export default function NuevoAlquiler() {
             Imágenes
           </label>
           <div className="relative">
-            <input type="file" name="images" accept="image/*" />
+            <label
+              htmlFor="imgButton"
+              className="cursor-pointer bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            >
+              Seleccionar imagenes
+            </label>
+            <input
+              id="imgButton"
+              type="file"
+              multiple={true}
+              name="images"
+              ref={register}
+              onChange={onImageChange}
+              accept="image/*"
+              className="hidden"
+            />
           </div>
+          <div className="flex w-full p-4">
+            {images.map(({ url }) => {
+              return (
+                <div
+                  className="w-40 h-40 bg-center relative"
+                  style={{
+                    backgroundImage: `url(${url})`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                  key={url}
+                >
+                  <button
+                    className="absolute top-0 right-0 mr-2 
+                    rounded-full bg-red-600 h-6 w-6 flex items-center justify-center"
+                    onClick={() => removeImage(url)}
+                  >
+                    X
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+          <button onClick={onUploadSubmission}>Subir a Firestore</button>
         </div>
 
         <div className="w-full mb-6 md:mb-4">
