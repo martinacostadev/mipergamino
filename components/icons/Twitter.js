@@ -1,5 +1,4 @@
-import React from 'react'
-import GenericIcon from "./GenericIcon";
+import React from 'react';
 
 const Twitter = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
