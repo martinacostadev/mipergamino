@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/tailwind.css";
 import "react-multi-carousel/lib/styles.css";
+import "../styles/TwitterButton.css";
 import MainLayout from "../components/MainLayout";
 import { Provider as SessionProvider } from "../src/session/context";
 

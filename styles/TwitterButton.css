@@ -1,0 +1,17 @@
+.twitter-share-button{
+    display: flex;
+    background-color: #1b95e0;
+    fill: white;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.twitter-share-button:hover{
+    background-color: #1b70e0;
+}
+
+.twitter-share-button:active{
+    width: 99%;
+    height: 99%;
+}
