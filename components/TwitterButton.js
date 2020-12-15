@@ -7,8 +7,8 @@ const TwitterButton = ({title, description, url}) => {
     const tweetDescription = formatTextToPlaceInURL(description);
     return (
         <div className="twitter-share-button">
-            <Twitter color={"fill-white"} size={24} />
-            <a className="mx-1"
+            <Twitter color={"fill-white"} size={24}/>
+            <a
             href={`https://twitter.com/intent/tweet?text=${tweetTitle}%20${tweetDescription}%20${url}`}>Compartir
             </a>
         </div>

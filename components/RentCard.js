@@ -20,6 +20,7 @@ import {
 } from "./icons";
 
 import TwitterButton from "./TwitterButton"
+import FacebookButton from "./FacebookButton"
 
 import { useRef } from "react";
 import ModalGoncy from "./ModalGoncy";
@@ -297,7 +298,7 @@ export default function RentCard({ rent }) {
               </div>
               <div className="ml-auto">
                 <TwitterButton title={title} description={description} url={Url} />
-                {/* <Facebook /> */}
+                <FacebookButton title={title} description={description} url={Url}/>
               </div>
             </div>
           </div>
