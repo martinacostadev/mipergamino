@@ -29,7 +29,7 @@
     "tailwindcss": "^1.8.10"
   },
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "start": "next start",
     "build": "next build"
   },
