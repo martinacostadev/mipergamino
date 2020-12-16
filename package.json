@@ -18,6 +18,7 @@
     "next": "^9.5.3",
     "postcss-preset-env": "^6.7.0",
     "react": "^16.13.1",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.9.5",
     "react-multi-carousel": "^2.5.5",

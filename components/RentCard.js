@@ -24,6 +24,7 @@ import FacebookButton from "./FacebookButton"
 
 import { useRef } from "react";
 import ModalGoncy from "./ModalGoncy";
+import CopyLink from "./CopyLink";
 // import Carousel from "react-multi-carousel";
 
 const { useState, useEffect } = React;
@@ -297,6 +298,7 @@ export default function RentCard({ rent }) {
                 <p className="text-gray-600">{user.phonenumber}</p>
               </div>
               <div className="ml-auto">
+                <CopyLink className="mx-1" url={Url} />
                 <TwitterButton className="mx-1" title={title} description={description} url={Url} />
                 <FacebookButton className="mx-1" title={title} url={Url}/>
               </div>
