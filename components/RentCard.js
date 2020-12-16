@@ -297,8 +297,8 @@ export default function RentCard({ rent }) {
                 <p className="text-gray-600">{user.phonenumber}</p>
               </div>
               <div className="ml-auto">
-                <TwitterButton title={title} description={description} url={Url} />
-                <FacebookButton title={title} description={description} url={Url}/>
+                <TwitterButton className="mx-1" title={title} description={description} url={Url} />
+                <FacebookButton className="mx-1" title={title} url={Url}/>
               </div>
             </div>
           </div>

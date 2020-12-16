@@ -1,17 +1,16 @@
 import React from 'react';
-import Twitter from "./icons/Twitter";
-import { formatTextToPlaceInURL } from "../utils/utils";
+import {TwitterShareButton, TwitterIcon} from "react-share";
 
-const TwitterButton = ({title, description, url}) => {
-    const tweetTitle = formatTextToPlaceInURL(title);
-    const tweetDescription = formatTextToPlaceInURL(description);
+const TwitterButton = ({title, url, className}) => {
     return (
-        <div className="twitter-share-button">
-            <Twitter color={"fill-white"} size={24}/>
-            <a
-            href={`https://twitter.com/intent/tweet?text=${tweetTitle}%20${tweetDescription}%20${url}`}>Compartir
-            </a>
-        </div>
+        <TwitterShareButton
+            url = {url}
+            title = {title}
+            hashtags = {["alquileres"]}
+            className = {className}
+            >
+            <TwitterIcon size = {36} />
+        </TwitterShareButton>
     )
 }
 
