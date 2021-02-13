@@ -29,7 +29,8 @@
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "start": "next start",
-    "build": "next build"
+    "build": "next build",
+    "lint": "eslint ./components/** ./pages/** -c .eslintrc.json --ext js,jsx"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,5 +46,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-root-import": "^6.6.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0"
   }
 }

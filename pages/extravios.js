@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import ExtravioCard from "~/components/ExtravioCard";
 import PageTitle from "~/components/PageTitle";
 import API from "~/db/extravio/api";
