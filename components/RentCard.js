@@ -1,6 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable no-undef */
+const { useState, useEffect } = React;
 import { useRouter } from "next/router";
 import { formatDate } from "../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +6,7 @@ import {
   faPaw,
   faBaby,
   faChevronDown,
-  faChevronUp
+  faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   Patio,
@@ -18,16 +16,9 @@ import {
   Inmobiliaria,
   Particular,
 } from "./icons";
-
-import TwitterButton from "./TwitterButton"
-import FacebookButton from "./FacebookButton"
-
 import { useRef } from "react";
 import ModalGoncy from "./ModalGoncy";
-import CopyLink from "./CopyLink";
-// import Carousel from "react-multi-carousel";
-
-const { useState, useEffect } = React;
+import Carousel from "react-multi-carousel";
 
 const responsive = {
   desktop: {
@@ -95,8 +86,6 @@ export default function RentCard({ rent }) {
     setHeight(Height != 51 ? 51 : wrapperHeight);
   };
 
-  //mipergamino.vercel.app es Temporal
-  const Url = "mipergamino.vercel.app" + router.asPath;
   return (
     <>
       <div className="w-full mb-16 sm:mb-14">
@@ -296,11 +285,6 @@ export default function RentCard({ rent }) {
                   {user.name} {user.whatsapp}
                 </p>
                 <p className="text-gray-600">{user.phonenumber}</p>
-              </div>
-              <div className="ml-auto">
-                <CopyLink className="mx-1" url={Url} />
-                <TwitterButton className="mx-1" title={title} description={description} url={Url} />
-                <FacebookButton className="mx-1" title={title} url={Url}/>
               </div>
             </div>
           </div>
