@@ -1,7 +1,6 @@
 import Head from "next/head";
-
-import PageTitle from "../components/PageTitle";
 import ProfilePage from "../components/ProfilePage";
+import PageTitle from "../components/PageTitle";
 import SessionContext, {
   Provider as SessionProvider,
 } from "../src/session/context";
