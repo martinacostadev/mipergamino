@@ -297,10 +297,10 @@ export default function RentCard({ rent }) {
                 </p>
                 <p className="text-gray-600">{user.phonenumber}</p>
               </div>
-              <div className="ml-auto">
+              <div className="ml-auto flex items-center">
                 <CopyLink className="mx-1" url={Url} />
                 <TwitterButton className="mx-1" title={title} description={description} url={Url} />
-                <FacebookButton className="mx-1" title={title} url={Url}/>
+                <FacebookButton className="mx-1" title={title} description={description} url={Url}/>
               </div>
             </div>
           </div>
