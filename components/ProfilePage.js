@@ -9,7 +9,7 @@ export default function ProfilePage({ user }) {
           <div className="flex justify-center w-3/4 md:w-1/2">
             <div className="relative w-full lg:w-3/4 items-center">
               <img
-                src={user.photoURL}
+                src={user?.photoURL}
                 alt="..."
                 className="shadow w-64 flex items-center rounded-full border-none"
               />
@@ -28,7 +28,7 @@ export default function ProfilePage({ user }) {
               className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="title"
               type="text"
-              placeholder={user.displayName}
+              placeholder={user?.displayName}
             />
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function ProfilePage({ user }) {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="user"
               type="text"
-              placeholder={user.email}
+              placeholder={user?.email}
             />
           </div>
         </div>

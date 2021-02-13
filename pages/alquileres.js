@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState, usePrefetchQuery } from "react";
 import Head from "next/head";
 import Filter from "~/components/Filter";
@@ -8,16 +9,35 @@ import API from "~/db/alquiler/api";
 import useInfiniteScroll from "~/utils/useInfiniteScroll";
 
 export default function Alquileres({ rents }) {
+  const [userCity, setUserCity] = useState("");
+  const [userProvince, setUserProvince] = useState("");
   const [offset, setOffset] = useState(0);
   const { totalDocs } = rents;
   const [rentsData, setRentsData] = useState([]);
   const [sideFilterVisibility, setSideFilterVisibility] = useState("invisible");
+
   useEffect(() => {
+    // TODO: Ver si es mejor grabar en tabla user de Firebase.
+    // en la pantalla principal no permitir ingresar si no tiene City y Province.
+    const city = localStorage.getItem("city");
+    const province = localStorage.getItem("province");
+    if (city) {
+      console.log('city', city)
+      setUserCity(city);
+      console.log("userCity: ", userCity);
+    }
+    if (province) {
+      setUserProvince(province);
+      console.log("userProvince: ", userProvince);
+    }
+
+    // TODO: Ver como enviar City y Province como Filter,
+    // así se muestran las publicaciones de dicha Ciudad y Provincia.
     rents && setRentsData(rents.docs);
   }, []);
 
   const [isFetching, setIsFetching] = useInfiniteScroll(async () => {
-    // Ver IntersectionObserver
+    // ToDo: Ver IntersectionObserver
     const currentOffSet = offset < totalDocs ? offset + 5 : totalDocs;
 
     setOffset(currentOffSet);
@@ -62,13 +82,13 @@ export default function Alquileres({ rents }) {
         childrenallowed,
       } = features;
       return (
-        (!parsedBedrooms || parsedBedrooms == bedrooms) &&
-        (!parsedBathrooms || parsedBathrooms == bathrooms) &&
-        (!Patio || Patio == exterior) &&
-        (!Garage || Garage == garage) &&
-        (!Mascotas || Mascotas == petsallowed) &&
-        (!Niños || Niños == childrenallowed) &&
-        (!Particular || Particular == isparticular)
+        (!parsedBedrooms || parsedBedrooms === bedrooms) &&
+        (!parsedBathrooms || parsedBathrooms === bathrooms) &&
+        (!Patio || Patio === exterior) &&
+        (!Garage || Garage === garage) &&
+        (!Mascotas || Mascotas === petsallowed) &&
+        (!Niños || Niños === childrenallowed) &&
+        (!Particular || Particular === isparticular)
       );
     });
     setRentsData(filteredData);
