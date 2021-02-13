@@ -22,7 +22,7 @@ import {
 import TwitterButton from "./TwitterButton"
 import FacebookButton from "./FacebookButton"
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import ModalGoncy from "./ModalGoncy";
 import CopyLink from "./CopyLink";
 // import Carousel from "react-multi-carousel";

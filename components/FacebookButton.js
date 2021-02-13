@@ -1,4 +1,3 @@
-import React from 'react'
 import {FacebookShareButton, FacebookIcon} from "react-share";
 
 const FacebookButton = ({title, description, url, className}) => {

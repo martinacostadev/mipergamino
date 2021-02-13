@@ -1,4 +1,3 @@
-import React from 'react';
 import {TwitterShareButton, TwitterIcon} from "react-share";
 
 const TwitterButton = ({title, url, className}) => {
