@@ -1,9 +1,10 @@
-import { useEffect, useState, usePrefetchQuery } from "react";
 import Head from "next/head";
+import { useEffect, usePrefetchQuery, useState } from "react";
+
 import Filter from "~/components/Filter";
 import FilterIcon from "~/components/icons/FilterIcon";
-import RentCard from "~/components/RentCard";
 import PageTitle from "~/components/PageTitle";
+import RentCard from "~/components/RentCard";
 import API from "~/db/alquiler/api";
 import useInfiniteScroll from "~/utils/useInfiniteScroll";
 
@@ -85,8 +86,7 @@ export default function Alquileres({ rents }) {
 
         <button
           onClick={() => setSideFilterVisibility("visible")}
-          className={`lg:hidden font-bold text-blue-500 my-2 flex items-center space-between`}
-        >
+          className={`lg:hidden font-bold text-blue-500 my-2 flex items-center space-between`}>
           <FilterIcon size={22} color={"fill-blue"} className="flex" />{" "}
           <span className="flex pl-2">Filtros</span>
         </button>
@@ -101,8 +101,7 @@ export default function Alquileres({ rents }) {
       <div className={`flex flex-row lg:flex-col lg:items-center`}>
         <div
           className="w-full lg:w-3/4 flex flex-col"
-          style={{ position: "absolute", top: 70 }}
-        >
+          style={{ position: "absolute", top: 70 }}>
           {/* {rentsData.length
             ? rentsData.map((rent) => <RentCard rent={rent} key={rent._id} />)
             : rents.docs.map((rent) => <RentCard rent={rent} key={rent._id} />)} */}
