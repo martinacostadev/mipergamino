@@ -18,11 +18,10 @@ export default function Alquileres({ rents }) {
 
   useEffect(() => {
     // TODO: Ver si es mejor grabar en tabla user de Firebase.
-    // en la pantalla principal no permitir ingresar si no tiene City y Province.
+    // TODO: en la pantalla principal no permitir ingresar si no tiene City y Province.
     const city = localStorage.getItem("city");
     const province = localStorage.getItem("province");
     if (city) {
-      console.log('city', city)
       setUserCity(city);
       console.log("userCity: ", userCity);
     }
@@ -34,7 +33,7 @@ export default function Alquileres({ rents }) {
     // TODO: Ver como enviar City y Province como Filter,
     // así se muestran las publicaciones de dicha Ciudad y Provincia.
     rents && setRentsData(rents.docs);
-  }, []);
+  }, [userCity, userProvince]);
 
   const [isFetching, setIsFetching] = useInfiniteScroll(async () => {
     // ToDo: Ver IntersectionObserver
@@ -137,11 +136,24 @@ export default function Alquileres({ rents }) {
 
 export const getServerSideProps = async ({ query }) => {
   try {
+    // TODO: Modificar para obtener Filtros realizados por Bianco
+
+    // Ejemplo filtro:
     // const filters = {
     //   "title": "Casa en alquiler",
     //   "features.bedrooms": 4
     // }
-    const filters = {}; // Modificar para obtener Filtros realizados por Bianco
+   
+    // TODO: Ver cómo hacer que dentro del objeto filtro los campos sean opcionales:
+    // const filters = {
+    //   location: {
+    //     city: 'Pergamino', // TODO: Ver como modificar para que utilice el hook userCity
+    //     village: 'Vicente López',
+    //     province: 'Buenos Aires' // TODO: Ver como modificar para que utilice el hook userProvince
+    //   }
+    // }     
+
+    const filters = {};     
 
     const Alquileres = await API.Alquileres.fetch(filters, 0, 5); // /api/alquiler/filters
 
