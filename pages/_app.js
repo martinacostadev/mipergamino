@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/tailwind.css";
 import "react-multi-carousel/lib/styles.css";
 import MainLayout from "../components/MainLayout";

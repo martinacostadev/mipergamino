@@ -1,15 +1,44 @@
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import firebase from "firebase/app";
-import "firebase/storage";
+import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import ImagesInput from "~/inputs/ImagesInput";
+import uploadImages from "./uploadImages";
 
 export default function NuevoAlquiler() {
+  const [buttonSubmitText, setButtonSubmitText] = useState("Enviar");
+  const [isSending, setIsSending] = useState(false);
   const [images, setImages] = useState([]);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, control } = useForm();
   const onSubmit = async (data) => {
+    setIsSending(true);
+    setButtonSubmitText("Enviando...");
     if (!data.title) console.log("apaaaa");
-    console.log("POST DATA: ", JSON.stringify(data));
-    console.table("Table Data", data);
+    let firebaseimages = await uploadImages(images);
+    let timeNow = Date.now();
+
+    let rentData = JSON.stringify({
+      ...data,
+      images: firebaseimages,
+      createdAt: timeNow,
+      updated: timeNow,
+      deleted: false,
+      warranties: 1,
+    });
+
+    // let rentData = JSON.stringify({
+    //   ...data,
+    //   images: firebaseimages,
+    //   price: price,
+    //   createdAt: timeNow,
+    //   updated: timeNow,
+    //   deleted: false,
+    //   warranties: 1,
+    //   isparticular: true,
+    //   user: {
+    //     name: "Martín Acosta",
+    //     phoneNumber: "+5493114324343",
+    //     whatsapp: true,
+    //   },
+    // });
 
     try {
       const res = await fetch("/api/alquiler", {
@@ -17,36 +46,22 @@ export default function NuevoAlquiler() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: rentData,
       });
 
-      // console.log("res", res);
-
       if (res.status === 200) {
+        setButtonSubmitText("Publicación creada con éxito.");
         console.log("Geniaaal!", res);
       } else {
+        setIsSending(false);
+        setButtonSubmitText("Enviar");
         console.log("Error!", res);
       }
     } catch (err) {
+      setIsSending(false);
+      setButtonSubmitText("Enviar");
       alert(err);
     }
-  };
-
-  // useEffect(() => {
-  //   register({ name: "title", type: "custom" }, { validate: { tieneValor } });
-  // });
-
-  // React.useEffect(() => {
-  //   setValue("images", images);
-  // }, [setValue, images]);
-
-  const randomImageName = (image) => {
-    const imageFormat = image.type.split("/")[1];
-    const date = Date.now();
-    const RandomSixNumbers = Math.floor(100000 + Math.random() * 900000);
-    const imageName = `${date}-${RandomSixNumbers}.${imageFormat}`;
-
-    return imageName;
   };
 
   const onImageChange = (e) => {
@@ -59,7 +74,6 @@ export default function NuevoAlquiler() {
   };
 
   const removeImage = (url) => {
-    console.log("url", url);
     const newImages = images.filter((image) => image.url != url);
     setImages(newImages);
   };
@@ -67,8 +81,6 @@ export default function NuevoAlquiler() {
   const onUploadSubmission = (e) => {
     e.preventDefault(); // prevent page refreshing
     const promises = [];
-
-    console.log("images", images);
 
     images.forEach((image) => {
       const uploadTask = firebase
@@ -89,37 +101,12 @@ export default function NuevoAlquiler() {
         (error) => console.log(error.code),
         async () => {
           const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-          console.log(downloadURL);
         }
       );
     });
     Promise.all(promises)
       .then(() => alert("Todas las imágenes se han subido"))
       .catch((err) => console.log(err.code));
-  };
-
-  const insert = async (e) => {
-    e.preventDefault;
-
-    console.log("formData: ", data);
-
-    try {
-      const res = await fetch("/api/insert", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (res.status === 200) {
-        console.log("Geniaaal!");
-      } else {
-        console.log("Error!");
-      }
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (
@@ -140,9 +127,9 @@ export default function NuevoAlquiler() {
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               name="title"
-              ref={register({ required: true })}
               type="text"
               placeholder="Casa en alquiler"
+              ref={register({ required: true })}
             />
 
             {errors.title && (
@@ -161,46 +148,14 @@ export default function NuevoAlquiler() {
             <textarea
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               name="description"
-              ref={register}
               rows="4"
               placeholder="Breve descripción"
+              ref={register}
             />
           </div>
         </div>
+
         <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="village"
-            >
-              Barrio
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              name="location.village"
-              ref={register}
-              type="text"
-              placeholder="Localidad"
-            />
-            {/* <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> */}
-          </div>
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="city"
-            >
-              Localidad
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              name="location.city"
-              ref={register}
-              type="text"
-              placeholder="Albuquerque"
-            />
-          </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -214,9 +169,28 @@ export default function NuevoAlquiler() {
                 name="location.province"
                 ref={register}
               >
-                <option>Córdoba</option>
                 <option>Buenos Aires</option>
-                <option>San Luis</option>
+                <option>Catamarca</option>
+                <option>Chaco</option>
+                <option>Chubut</option>
+                <option>Córdoba</option>
+                <option>Corrientes</option>
+                <option>Entre Ríos</option>
+                <option>Formosa</option>
+                <option>Jujuy</option>
+                <option>La Pampa</option>
+                <option>La Rioja</option>
+                <option>Mendoza</option>
+                <option>Misiones</option>
+                <option>Neuquén</option>
+                <option>Río Negro</option>
+                <option>Salta</option>
+                <option>San Juan</option>
+                <option>San Cruz</option>
+                <option>Santa Fe</option>
+                <option>Santiago del Estero</option>
+                <option>Tierra del Fuego</option>
+                <option>Tucumán</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
@@ -232,6 +206,39 @@ export default function NuevoAlquiler() {
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="city"
+            >
+              Localidad
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              name="location.city"
+              type="text"
+              placeholder="Albuquerque"
+              ref={register}
+            />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-2">
+          <div className="w-full md:w-1/2 px-3">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="village"
+            >
+              Barrio
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              name="location.village"
+              type="text"
+              placeholder="Localidad"
+              ref={register}
+            />
+            {/* <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> */}
+          </div>
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="zipCode"
             >
               Código Postal
@@ -241,6 +248,7 @@ export default function NuevoAlquiler() {
               name="location.zipCode"
               type="text"
               placeholder="90210"
+              ref={register}
             />
           </div>
         </div>
@@ -319,14 +327,25 @@ export default function NuevoAlquiler() {
             >
               Garage
             </label>
-            <select
-              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              name="features.garage"
-              ref={register}
-            >
-              <option value="true">Sí</option>
-              <option value="false">No</option>
-            </select>
+            <div className="relative">
+              <select
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                name="features.garage"
+                ref={register}
+              >
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -336,7 +355,7 @@ export default function NuevoAlquiler() {
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="exterior"
             >
-              Exterior
+              Patio
             </label>
             <div className="relative">
               <select
@@ -392,14 +411,136 @@ export default function NuevoAlquiler() {
             >
               Chicos
             </label>
-            <select
-              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              name="features.childrenallowed"
-              ref={register}
+            <div className="relative">
+              <select
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                name="features.childrenallowed"
+                ref={register}
+              >
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap -mx-3 mb-2">
+          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="price"
             >
-              <option value="true">Sí</option>
-              <option value="false">No</option>
-            </select>
+              Precio
+            </label>
+            <div className="relative">
+              <input
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                name="price"
+                type="text"
+                placeholder="$"
+                ref={register}
+              />
+            </div>
+          </div>
+          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="petsallowed"
+            >
+              Es Particular
+            </label>
+            <div className="relative">
+              <select
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                name="isparticular"
+                ref={register}
+              >
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap -mx-3 mb-2">
+          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="user.name"
+            >
+              Nombre Contacto
+            </label>
+            <div className="relative">
+              <input
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                name="user.name"
+                type="text"
+                placeholder="Contacto"
+                ref={register}
+              />
+            </div>
+          </div>
+          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="petsallowed"
+            >
+              Teléfono
+            </label>
+            <div className="relative">
+              <input
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                name="user.phonenumber"
+                type="text"
+                placeholder="+549..."
+                ref={register}
+              />
+            </div>
+          </div>
+          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="childrenallowed"
+            >
+              WhatsApp
+            </label>
+            <div className="relative">
+              <select
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                name="user.whatsapp"
+                ref={register}
+              >
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -410,22 +551,22 @@ export default function NuevoAlquiler() {
           >
             Imágenes
           </label>
-          <div className="relative">
-            <label
-              htmlFor="imgButton"
-              className="cursor-pointer bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-            >
-              Seleccionar imagenes
-            </label>
-            <input
-              id="imgButton"
-              type="file"
-              multiple={true}
+          <div className="relative mt-4">
+            <Controller
               name="images"
-              ref={register}
-              onChange={onImageChange}
-              accept="image/*"
+              control={control}
+              id="imgButton"
               className="hidden"
+              value={images || []}
+              render={({ onChange, value, ref }) => (
+                <ImagesInput
+                  type="file"
+                  value={value}
+                  onChange={onChange}
+                  setImages={setImages}
+                  inputRef={ref}
+                />
+              )}
             />
           </div>
           <div className="flex w-full p-4">
@@ -442,7 +583,7 @@ export default function NuevoAlquiler() {
                 >
                   <button
                     className="absolute top-0 right-0 mr-2 
-                    rounded-full bg-red-600 h-6 w-6 flex items-center justify-center"
+                      rounded-full bg-red-600 h-6 w-6 flex items-center justify-center"
                     onClick={() => removeImage(url)}
                   >
                     X
@@ -451,7 +592,6 @@ export default function NuevoAlquiler() {
               );
             })}
           </div>
-          <button onClick={onUploadSubmission}>Subir a Firestore</button>
         </div>
 
         <div className="w-full mb-6 md:mb-4">
@@ -462,14 +602,14 @@ export default function NuevoAlquiler() {
         </div>
 
         <div className="flex justify-center mt-6 mb-6">
-          <div className="lg:block md:ml-6">
-            <button
-              type="submit"
-              className="p-1 px-4 mx-4 hover:bg-green-500 text-white-700 font-semibold hover:text-white border border-green-500 hover:border-transparent rounded"
-            >
-              Agregar
-            </button>
-          </div>
+          <button
+            type="submit"
+            className=" w-full p-1 hover:bg-green-500 text-white-700 font-semibold hover:text-white border border-green-500 hover:border-transparent rounded"
+            disabled={isSending}
+            id="btnSubmit"
+          >
+            {buttonSubmitText}
+          </button>
         </div>
       </form>
     </div>

@@ -1,15 +1,13 @@
-import { faBaby, faPaw } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { formatDate } from "~/utils/utils";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaw, faBaby } from "@fortawesome/free-solid-svg-icons";
 import {
-  Bathroom,
-  Bedroom,
+  Patio,
   Garage,
+  Bedroom,
+  Bathroom,
   Inmobiliaria,
   Particular,
-  Patio,
 } from "./icons";
 
 export default function ExtravioCard({ extravio }) {
@@ -31,7 +29,8 @@ export default function ExtravioCard({ extravio }) {
         <div
           className="rent-image bg-center lg:h-auto lg:w-1/3 lg:rounded-t-none lg:rounded-l"
           style={{ backgroundImage: `url(${images[0]})`, position: "relative" }}
-          title={title}></div>
+          title={title}
+        ></div>
         <div className="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
           <div className="mb-8">
             <p className="flex justify-between text-sm text-gray-600 items-center pb-2">

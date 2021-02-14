@@ -1,6 +1,6 @@
 import Head from "next/head";
-
 import MenuButton from "../components/MenuButton";
+import CitySelection from "components/CitySelection";
 
 const menuButtons = ["Alquileres", "Extravíos", "Empleos"];
 export default function HomePage() {
@@ -13,6 +13,7 @@ export default function HomePage() {
       </Head>
 
       <main id="root">
+        <CitySelection />
         <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center h-36 sm:grid-rows-1 gap-4 py-4">
           {menuButtons.map((string) => (
             <MenuButton key={string} text={string} />

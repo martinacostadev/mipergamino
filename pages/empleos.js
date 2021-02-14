@@ -1,5 +1,4 @@
 import Head from "next/head";
-
 import EmpleoCard from "~/components/EmpleoCard";
 import PageTitle from "~/components/PageTitle";
 import API from "~/db/empleo/api";

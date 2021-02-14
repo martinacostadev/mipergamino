@@ -1,4 +1,3 @@
-import React from "react";
 import { Gmail } from "./icons";
 
 const Login = ({ login }) => {
@@ -7,7 +6,7 @@ const Login = ({ login }) => {
       <div className="w-full lg:w-1/3 p-8 flex rounded items-center justify-center bg-white py-12">
         <div className="w-full">
           <div>
-            <img className="mx-auto h-12 w-auto" src="logo.svg" alt="Logo" />
+            {/* <img className="mx-auto h-12 w-auto" src="logo.svg" alt="Logo" /> */}
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Iniciar sesión
             </h2>

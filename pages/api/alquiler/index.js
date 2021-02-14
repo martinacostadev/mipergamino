@@ -18,9 +18,6 @@ export default async (req, res) => {
 
     case "POST": {
       try {
-        console.log("req Pages/API/Alquileres/Index ", req);
-        //req.method = "POST";
-
         const { body } = req;
 
         if (body)

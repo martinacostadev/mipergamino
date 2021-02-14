@@ -1,5 +1,4 @@
 export default async (req, res) => {
-  console.log(req)
   // Call different methods depending on the method
   switch (req.method) {
     case "PATCH": {

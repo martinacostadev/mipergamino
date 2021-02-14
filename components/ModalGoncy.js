@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom"
+import ReactDOM from 'react-dom';
 
 export default function ModalGoncy({ children, onClose }) { 
   React.useEffect(() => {

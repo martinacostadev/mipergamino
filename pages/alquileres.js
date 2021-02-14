@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+import { useEffect, useState, usePrefetchQuery } from "react";
 import Head from "next/head";
 import { useEffect, usePrefetchQuery, useState } from "react";
 
@@ -9,16 +11,34 @@ import API from "~/db/alquiler/api";
 import useInfiniteScroll from "~/utils/useInfiniteScroll";
 
 export default function Alquileres({ rents }) {
+  const [userCity, setUserCity] = useState("");
+  const [userProvince, setUserProvince] = useState("");
   const [offset, setOffset] = useState(0);
   const { totalDocs } = rents;
   const [rentsData, setRentsData] = useState([]);
   const [sideFilterVisibility, setSideFilterVisibility] = useState("invisible");
+
   useEffect(() => {
+    // TODO: Ver si es mejor grabar en tabla user de Firebase.
+    // TODO: en la pantalla principal no permitir ingresar si no tiene City y Province.
+    const city = localStorage.getItem("city");
+    const province = localStorage.getItem("province");
+    if (city) {
+      setUserCity(city);
+      console.log("userCity: ", userCity);
+    }
+    if (province) {
+      setUserProvince(province);
+      console.log("userProvince: ", userProvince);
+    }
+
+    // TODO: Ver como enviar City y Province como Filter,
+    // así se muestran las publicaciones de dicha Ciudad y Provincia.
     rents && setRentsData(rents.docs);
-  }, []);
+  }, [userCity, userProvince]);
 
   const [isFetching, setIsFetching] = useInfiniteScroll(async () => {
-    // Ver IntersectionObserver
+    // ToDo: Ver IntersectionObserver
     const currentOffSet = offset < totalDocs ? offset + 5 : totalDocs;
 
     setOffset(currentOffSet);
@@ -63,13 +83,13 @@ export default function Alquileres({ rents }) {
         childrenallowed,
       } = features;
       return (
-        (!parsedBedrooms || parsedBedrooms == bedrooms) &&
-        (!parsedBathrooms || parsedBathrooms == bathrooms) &&
-        (!Patio || Patio == exterior) &&
-        (!Garage || Garage == garage) &&
-        (!Mascotas || Mascotas == petsallowed) &&
-        (!Niños || Niños == childrenallowed) &&
-        (!Particular || Particular == isparticular)
+        (!parsedBedrooms || parsedBedrooms === bedrooms) &&
+        (!parsedBathrooms || parsedBathrooms === bathrooms) &&
+        (!Patio || Patio === exterior) &&
+        (!Garage || Garage === garage) &&
+        (!Mascotas || Mascotas === petsallowed) &&
+        (!Niños || Niños === childrenallowed) &&
+        (!Particular || Particular === isparticular)
       );
     });
     setRentsData(filteredData);
@@ -116,11 +136,24 @@ export default function Alquileres({ rents }) {
 
 export const getServerSideProps = async ({ query }) => {
   try {
+    // TODO: Modificar para obtener Filtros realizados por Bianco
+
+    // Ejemplo filtro:
     // const filters = {
     //   "title": "Casa en alquiler",
     //   "features.bedrooms": 4
     // }
-    const filters = {}; // Modificar para obtener Filtros realizados por Bianco
+   
+    // TODO: Ver cómo hacer que dentro del objeto filtro los campos sean opcionales:
+    // const filters = {
+    //   location: {
+    //     city: 'Pergamino', // TODO: Ver como modificar para que utilice el hook userCity
+    //     village: 'Vicente López',
+    //     province: 'Buenos Aires' // TODO: Ver como modificar para que utilice el hook userProvince
+    //   }
+    // }     
+
+    const filters = {};     
 
     const Alquileres = await API.Alquileres.fetch(filters, 0, 5); // /api/alquiler/filters
 

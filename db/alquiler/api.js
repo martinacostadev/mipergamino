@@ -12,17 +12,10 @@ export default {
         { offset, limit }
       );
 
-      console.log(Alquileres);
-
       return JSON.parse(JSON.stringify(Alquileres));
     },
     save: async ({ body }) => {
-      // console.log("A la API llega bien");
-      // console.log("El Body ", body);
-
       const Alquileres = await Alquiler.insertMany(body);
-
-      console.log(Alquileres);
 
       return JSON.parse(JSON.stringify(Alquileres));
     },
