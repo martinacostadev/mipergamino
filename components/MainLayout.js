@@ -1,21 +1,21 @@
 import Head from "next/head";
 import NavBar from "./NavBar";
 
-export default function MainLayout({ children }) {
+function HeadComponent({ title }) {
   return (
-    <div>
+    <Head>
+      <title>{title}</title>
+      <meta property="og:title" content="MiPergamino" key="title" />
+    </Head>
+  )
+}
+
+export default function MainLayout({ children, title }) {
+  return (
+    <>
+      <HeadComponent title={title} />
       <NavBar />
-      <Head>
-        <title>MiPergamino</title>
-        <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-        <meta property="og:title" content="MiPergamino" key="title" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div className="lg:px-8 px-4 mt-32">{children}</div>
-    </div>
+      <main className="lg:px-8 px-4 mt-32 m-auto">{children}</main>
+    </>
   );
 }

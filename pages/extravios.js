@@ -1,23 +1,20 @@
-import Head from "next/head";
 import ExtravioCard from "~/components/ExtravioCard";
+import MainLayout from "~/components/MainLayout";
 import PageTitle from "~/components/PageTitle";
 import API from "~/db/extravio/api";
 
 export default function Extravios({ extravios }) {
+  const RenderExtravios = extravios?.map((extravio) => (
+    <ExtravioCard extravio={extravio} key={extravio._id} />
+  ))
+
   return (
-    <div className="mx-auto">
-      <Head>
-        <title>Extravíos - MiPergamino</title>
-        <meta property="og:title" content="MiPergamino" key="title" />
-      </Head>
+    <MainLayout title="Extravíos - MiPergamino">
       <div className="m-auto" style={{ height: 10 }}>
         <PageTitle title="Extravíos" />
-
-        {extravios.map((extravio) => (
-          <ExtravioCard extravio={extravio} key={extravio._id} />
-        ))}
+        {RenderExtravios}
       </div>
-    </div>
+    </MainLayout >
   );
 }
 

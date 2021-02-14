@@ -1,12 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState, usePrefetchQuery } from "react";
-import Head from "next/head";
 import Filter from "~/components/Filter";
 import FilterIcon from "~/components/icons/FilterIcon";
 import RentCard from "~/components/RentCard";
 import PageTitle from "~/components/PageTitle";
 import API from "~/db/alquiler/api";
 import useInfiniteScroll from "~/utils/useInfiniteScroll";
+import MainLayout from "~/components/MainLayout";
 
 export default function Alquileres({ rents }) {
   const [userCity, setUserCity] = useState("");
@@ -93,44 +93,41 @@ export default function Alquileres({ rents }) {
     setRentsData(filteredData);
   };
   return (
-    <div className="mx-auto relative">
-      <Head>
-        <title>Alquileres - MiPergamino</title>
-        <meta property="og:title" content="MiPergamino" key="title" />
-      </Head>
+    <MainLayout title="Alquileres - MiPergamino">
+      <div className="mx-auto relative">
+        <div className="fixed z-50 flex bg-gray-300 w-22 p-2 rounded-r-md lg:w-full lg">
+          <PageTitle title="Alquileres" />
 
-      <div className="fixed z-50 flex bg-gray-300 w-22 p-2 rounded-r-md lg:w-full lg">
-        <PageTitle title="Alquileres" />
+          <button
+            onClick={() => setSideFilterVisibility("visible")}
+            className={`lg:hidden font-bold text-blue-500 my-2 flex items-center space-between`}
+          >
+            <FilterIcon size={22} color={"fill-blue"} className="flex" />{" "}
+            <span className="flex pl-2">Filtros</span>
+          </button>
 
-        <button
-          onClick={() => setSideFilterVisibility("visible")}
-          className={`lg:hidden font-bold text-blue-500 my-2 flex items-center space-between`}
-        >
-          <FilterIcon size={22} color={"fill-blue"} className="flex" />{" "}
-          <span className="flex pl-2">Filtros</span>
-        </button>
+          <Filter
+            handleFilter={handleFilter}
+            setSideFilterVisibility={setSideFilterVisibility}
+            sideFilterVisibility={sideFilterVisibility}
+          />
+        </div>
 
-        <Filter
-          handleFilter={handleFilter}
-          setSideFilterVisibility={setSideFilterVisibility}
-          sideFilterVisibility={sideFilterVisibility}
-        />
-      </div>
-
-      <div className={`flex flex-row lg:flex-col lg:items-center`}>
-        <div
-          className="w-full lg:w-3/4 flex flex-col"
-          style={{ position: "absolute", top: 70 }}
-        >
-          {/* {rentsData.length
+        <div className={`flex flex-row lg:flex-col lg:items-center`}>
+          <div
+            className="w-full lg:w-3/4 flex flex-col"
+            style={{ position: "absolute", top: 70 }}
+          >
+            {/* {rentsData.length
             ? rentsData.map((rent) => <RentCard rent={rent} key={rent._id} />)
             : rents.docs.map((rent) => <RentCard rent={rent} key={rent._id} />)} */}
-          {rentsData.map((rent) => (
-            <RentCard rent={rent} key={rent._id} />
-          ))}
+            {rentsData?.map((rent) => (
+              <RentCard rent={rent} key={rent._id} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 }
 
@@ -143,7 +140,7 @@ export const getServerSideProps = async ({ query }) => {
     //   "title": "Casa en alquiler",
     //   "features.bedrooms": 4
     // }
-   
+
     // TODO: Ver cómo hacer que dentro del objeto filtro los campos sean opcionales:
     // const filters = {
     //   location: {
@@ -153,7 +150,7 @@ export const getServerSideProps = async ({ query }) => {
     //   }
     // }     
 
-    const filters = {};     
+    const filters = {};
 
     const Alquileres = await API.Alquileres.fetch(filters, 0, 5); // /api/alquiler/filters
 
