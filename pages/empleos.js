@@ -1,23 +1,18 @@
-import Head from "next/head";
 import EmpleoCard from "~/components/EmpleoCard";
+import MainLayout from "~/components/MainLayout";
 import PageTitle from "~/components/PageTitle";
 import API from "~/db/empleo/api";
 
 export default function Empleos({ empleos }) {
-  return (
-    <div className="mx-auto">
-      <Head>
-        <title>Empleos - MiPergamino</title>
-        <meta property="og:title" content="MiPergamino" key="title" />
-      </Head>
-      <div className="m-auto">
-        <PageTitle title="Empleos" />
+  const RenderEmpleos = empleos?.map((empleo) => (
+    <EmpleoCard empleo={empleo} key={empleo._id} />
+  ))
 
-        {empleos.map((empleo) => (
-          <EmpleoCard empleo={empleo} key={empleo._id} />
-        ))}
-      </div>
-    </div>
+  return (
+    <MainLayout title="Empleos - MiPergamino">
+      <PageTitle title="Empleos" />
+      {RenderEmpleos}
+    </MainLayout>
   );
 }
 

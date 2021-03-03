@@ -16,7 +16,7 @@ body {
 } */
 
 .item-menu-inicio {
-  @apply mx-auto w-full text-center px-10 py-8 border-solid border-2 border-gray-400 mb-3 cursor-pointer;
+  @apply mx-auto w-full text-center p-2 border-solid border-2 border-gray-400 mb-3 cursor-pointer;
 }
 
 .rent-image {

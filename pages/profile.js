@@ -1,33 +1,20 @@
-import Head from "next/head";
 import ProfilePage from "../components/ProfilePage";
 import PageTitle from "../components/PageTitle";
-import SessionContext, {
-  Provider as SessionProvider,
-} from "../src/session/context";
+import MainLayout from "~/components/MainLayout";
+import { useContext } from "react";
+import SessionContext from "~/src/session/context"
 
 export default function Profile() {
+  // usar useContext en vez de <Context.Consumer>
+  const { state } = useContext(SessionContext)
+
   return (
-    <div className="px-4">
-      <Head>
-        <title>Perfil - MiPergamino</title>
-        <meta property="og:title" content="MiPergamino" key="title" />
-      </Head>
-      <div className="m-auto">
-        <PageTitle title="Perfil" />
-
-        {/* <ProfilePage /> */}
-        <SessionProvider>
-          <SessionContext.Consumer>
-            {(context) => {
-              return <ProfilePage user={context.state.user} />;
-            }}
-          </SessionContext.Consumer>
-        </SessionProvider>
-
-        {/* <Link href="/" className="flex float-right">
+    <MainLayout title="Perfil - MiPergamino">
+      <PageTitle title="Perfil" />
+      <ProfilePage user={state.user} />;
+      {/* <Link href="/" className="flex float-right">
           <a>Volver</a>
         </Link> */}
-      </div>
-    </div>
+    </MainLayout>
   );
 }
