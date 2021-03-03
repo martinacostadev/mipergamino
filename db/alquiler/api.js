@@ -1,12 +1,23 @@
-import '../database'
-import Alquiler from '../models/alquiler.model'
+import "../database";
+import Alquiler from "../models/alquiler.model";
 
 export default {
   Alquileres: {
-    fetch: async () => {
-      const Alquileres = await Alquiler.find({ "deleted": { $eq: false } })
+    fetch: async (filters, offset, limit) => {
+      const Alquileres = await Alquiler.paginate(
+        {
+          deleted: { $eq: false },
+          ...filters,
+        },
+        { offset, limit }
+      );
 
-      return JSON.parse(JSON.stringify(Alquileres))
-    }
-  }
-}
+      return JSON.parse(JSON.stringify(Alquileres));
+    },
+    save: async ({ body }) => {
+      const Alquileres = await Alquiler.insertMany(body);
+
+      return JSON.parse(JSON.stringify(Alquileres));
+    },
+  },
+};
